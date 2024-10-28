@@ -1,5 +1,6 @@
-import { layouts } from "framework/config/layouts";
+import { application } from "framework/config/application";
 import { Layout } from "./layout";
+
 import { Screen } from "quasar";
 
 export class LayoutManager {
@@ -9,33 +10,32 @@ export class LayoutManager {
   constructor() {
     this.layouts = [];
     this.default = "";
+  }
 
+  async initialize() {
     const devices = ["desktop", "tablet", "mobile"];
 
-    const layoutNames = Object.keys(layouts.templates);
-    layoutNames.forEach((name) => {
-      let layoutName;
+    for (let i = 0; i < application.layouts.templates.length; i++) {
+      const name = application.layouts.templates[i];
+
       let deviceName = "desktop";
       if (name.includes("-")) {
         const device = name.split("-")[1];
         if (devices.includes(device)) deviceName = device;
       }
+
+      let layoutName;
       layoutName = name.split("-")[0];
 
-      const layout = new Layout(
-        layoutName,
-        deviceName,
-        layouts.templates[name]
-      );
-
+      const definition = await import("framework/layouts/" + name + ".js");
+      const layout = new Layout(layoutName, deviceName, definition.default);
       this.layouts.push(layout);
-    });
-
+    }
     if (
-      layouts.default &&
-      this.layouts.find((e) => e.name === layouts.default)
+      application.layouts.default &&
+      this.layouts.find((e) => e.name === application.layouts.default)
     ) {
-      this.default = layouts.default;
+      this.default = application.layouts.default;
     } else {
       this.default = this.layouts[0].name;
     }

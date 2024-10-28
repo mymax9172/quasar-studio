@@ -3,6 +3,6 @@
 
 export const language = {
   version: "Versione",
-  Customers: "Clienti",
-  Suppliers: "Fornitori",
+  customers: "Clienti",
+  suppliers: "Fornitori",
 };

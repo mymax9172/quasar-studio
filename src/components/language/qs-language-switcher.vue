@@ -1,29 +1,27 @@
 <template>
-  <template v-if="mini">
-    <q-btn flat round>
-      <q-avatar size="md">
-        <span :class="currentCountryClass"></span>
-      </q-avatar>
-      <q-menu>
-        <q-list dense>
-          <q-item
-            v-close-popup
-            clickable
-            v-for="lang in languages"
-            :key="lang"
-            @click="changeLanguage(lang)"
-          >
-            <q-item-section side>
-              <span :class="'fi fi-' + getCountryCode(lang)"></span>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ getLanguageName(lang) }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-menu>
-    </q-btn>
-  </template>
+  <q-btn flat round>
+    <q-avatar size="md">
+      <span :class="currentCountryClass"></span>
+    </q-avatar>
+    <q-menu>
+      <q-list dense>
+        <q-item
+          v-close-popup
+          clickable
+          v-for="lang in languages"
+          :key="lang"
+          @click="changeLanguage(lang)"
+        >
+          <q-item-section side>
+            <span :class="'fi fi-' + getCountryCode(lang)"></span>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ getLanguageName(lang) }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-menu>
+  </q-btn>
 </template>
 
 <style scoped>
@@ -32,11 +30,7 @@
 
 <script>
 export default {
-  name: "LanguageSwitcher",
-
-  props: {
-    mini: Boolean,
-  },
+  name: "QsLanguageSwitcher",
 
   computed: {
     currentCountryClass() {

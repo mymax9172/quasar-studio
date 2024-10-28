@@ -4,17 +4,26 @@
     <header-layout :layout="layout" @click="onHeaderClick">
       <!-- Left slot -->
       <template v-if="layout.header?.slots?.left" v-slot:left="props">
-        <component :is="getComponent(layout.header.slots.left)" :props="props" />
+        <component
+          :is="getComponent(layout.header.slots.left)"
+          :props="props"
+        />
       </template>
 
       <!-- Middle slot -->
       <template v-if="layout.header?.slots?.middle" v-slot:middle="props">
-        <component :is="getComponent(layout.header.slots.middle)" :props="props" />
+        <component
+          :is="getComponent(layout.header.slots.middle)"
+          :props="props"
+        />
       </template>
 
       <!-- Right slot -->
       <template v-if="layout.header?.slots?.right" v-slot:right="props">
-        <component :is="getComponent(layout.header.slots.right)" :props="props" />
+        <component
+          :is="getComponent(layout.header.slots.right)"
+          :props="props"
+        />
       </template>
     </header-layout>
 
@@ -27,17 +36,26 @@
     >
       <!-- Top slot -->
       <template v-if="layout.leftPanel?.slots.top" v-slot:top="props">
-        <component :is="getComponent(layout.leftPanel.slots.top)" :props="props" />
+        <component
+          :is="getComponent(layout.leftPanel.slots.top)"
+          :props="props"
+        />
       </template>
 
       <!-- Middle slot -->
       <template v-if="layout.leftPanel?.slots.middle" v-slot:middle="props">
-        <component :is="getComponent(layout.leftPanel.slots.middle)" :props="props" />
+        <component
+          :is="getComponent(layout.leftPanel.slots.middle)"
+          :props="props"
+        />
       </template>
 
       <!-- Bottom slot -->
       <template v-if="layout.leftPanel?.slots.bottom" v-slot:bottom="props">
-        <component :is="getComponent(layout.leftPanel.slots.bottom)" :props="props" />
+        <component
+          :is="getComponent(layout.leftPanel.slots.bottom)"
+          :props="props"
+        />
       </template>
     </panel-layout>
 
@@ -50,17 +68,26 @@
     >
       <!-- Top slot -->
       <template v-if="layout.rightPanel?.slots.top" v-slot:top="props">
-        <component :is="getComponent(layout.rightPanel.slots.top)" :props="props" />
+        <component
+          :is="getComponent(layout.rightPanel.slots.top)"
+          :props="props"
+        />
       </template>
 
       <!-- Middle slot -->
       <template v-if="layout.rightPanel?.slots.middle" v-slot:middle="props">
-        <component :is="getComponent(layout.rightPanel.slots.middle)" :props="props" />
+        <component
+          :is="getComponent(layout.rightPanel.slots.middle)"
+          :props="props"
+        />
       </template>
 
       <!-- Bottom slot -->
       <template v-if="layout.rightPanel?.slots.bottom" v-slot:bottom="props">
-        <component :is="getComponent(layout.rightPanel.slots.bottom)" :props="props" />
+        <component
+          :is="getComponent(layout.rightPanel.slots.bottom)"
+          :props="props"
+        />
       </template>
     </panel-layout>
 
@@ -68,17 +95,26 @@
     <footer-layout :layout="layout">
       <!-- Left slot -->
       <template v-if="layout.footer?.slots?.left" v-slot:left="props">
-        <component :is="getComponent(layout.footer.slots.left)" :props="props" />
+        <component
+          :is="getComponent(layout.footer.slots.left)"
+          :props="props"
+        />
       </template>
 
       <!-- Center slot -->
       <template v-if="layout.footer?.slots?.middle" v-slot:middle="props">
-        <component :is="getComponent(layout.footer.slots.middle)" :props="props" />
+        <component
+          :is="getComponent(layout.footer.slots.middle)"
+          :props="props"
+        />
       </template>
 
       <!-- Right slot -->
       <template v-if="layout.footer?.slots?.right" v-slot:right="props">
-        <component :is="getComponent(layout.footer.slots.right)" :props="props" />
+        <component
+          :is="getComponent(layout.footer.slots.right)"
+          :props="props"
+        />
       </template>
     </footer-layout>
 

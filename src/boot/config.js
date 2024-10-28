@@ -4,6 +4,7 @@ import { useSettingsStore } from "src/stores/settings";
 
 // Load default configuration
 const configuration = new Configuration();
+await configuration.initialize();
 
 export default boot(({ app }) => {
   // Check current settings

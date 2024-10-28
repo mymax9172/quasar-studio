@@ -74,8 +74,8 @@ export const navigation = {
     // },
     {
       name: "customers",
-      title: "Customers",
-      caption: "Customers",
+      title: "customers",
+      caption: "customers",
       icon: "business",
       to: "/client/organization/view",
       style: {
@@ -84,8 +84,8 @@ export const navigation = {
     },
     {
       name: "suppliers",
-      title: "Suppliers",
-      caption: "Suppliers",
+      title: "suppliers",
+      caption: "suppliers",
       icon: "business",
       to: "/client/organization/view",
       style: {

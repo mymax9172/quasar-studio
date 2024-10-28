@@ -46,11 +46,11 @@
           </slot>
         </div>
 
-        <!-- Title slot -->
+        <!-- Middle slot -->
         <div class="col q-px-md flex flex-center">
           <slot
             v-if="!layout.header.noMiddleSlot"
-            name="title"
+            name="middle"
             :header="layout.header"
           >
             <span class="text-bold text-h6">{{ title }}</span>
@@ -73,7 +73,7 @@
           </div>
 
           <div v-if="layout.header.showLanguageSwitcher">
-            <language-switcher mini />
+            <qs-language-switcher />
           </div>
 
           <q-btn
@@ -106,14 +106,14 @@
 <script>
 import { chain } from "src/helpers/chain";
 import MenuHeaderItem from "../navigation/menu-header-item.vue";
-import LanguageSwitcher from "../language/language-switcher.vue";
+import QsLanguageSwitcher from "../language/qs-language-switcher.vue";
 
 export default {
   name: "HeaderLayout",
 
   emits: ["click"],
 
-  components: { MenuHeaderItem, LanguageSwitcher },
+  components: { MenuHeaderItem, QsLanguageSwitcher },
 
   props: {
     layout: Object,

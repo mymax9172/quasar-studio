@@ -32,6 +32,15 @@ export const application = {
     supported: ["en-US", "it-IT"],
   },
 
+  // Layouts
+  layouts: {
+    // Default layout
+    default: "main",
+
+    // Available layoput templates
+    templates: ["main", "secondary"],
+  },
+
   // Entitlements (application modules)
-  // entitlements: [],
+  entitlements: [],
 };
