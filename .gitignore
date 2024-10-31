@@ -1,7 +1,10 @@
 .DS_Store
 .thumbs.db
 node_modules
-framework
+
+
+# Quasar studio configuration
+/framework
 
 # Quasar core related directories
 .quasar
@@ -32,3 +35,4 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
