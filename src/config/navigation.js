@@ -1,4 +1,4 @@
-import { navigation } from "framework/config/navigation";
+import { navigation } from "app/framework/config/navigation";
 import { NavigationItem } from "./navigation.item";
 
 export class Navigation {

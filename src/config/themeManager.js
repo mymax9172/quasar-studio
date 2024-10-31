@@ -1,4 +1,4 @@
-import { themes } from "framework/config/themes";
+import { themes } from "app/framework/config/themes";
 import { Theme } from "./theme";
 
 export class ThemeManager {

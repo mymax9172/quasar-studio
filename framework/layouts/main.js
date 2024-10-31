@@ -37,6 +37,7 @@ export default {
       // right: () => import("framework/src/components/my-header.vue"),
     },
   },
+
   // Left Panel definition
   leftPanel: {
     // **************** TOP SLOT
@@ -71,7 +72,7 @@ export default {
     },
   },
   // Right Panel definition
-  // rightPanel: {},
+  rightPanel: {},
   // Footer definition
   footer: {
     // **************** LEFT SLOT

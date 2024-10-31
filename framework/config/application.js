@@ -3,10 +3,10 @@
  ************************************************************/
 export const application = {
   // Name of the application
-  name: "My Application",
+  name: "Pippo",
 
   // Public title of the application
-  title: "My Application",
+  title: "iCareGiver 360",
 
   // Credits
   credits: {

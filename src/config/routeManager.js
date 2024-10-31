@@ -1,4 +1,4 @@
-import { storyboard } from "framework/config/storyboard";
+import { storyboard } from "app/framework/config/storyboard";
 import { Route } from "./route";
 
 export class RouteManager {

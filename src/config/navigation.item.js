@@ -9,9 +9,9 @@ export class NavigationItem {
   separator;
 
   constructor(definition) {
-    this.separator = (definition == null);
+    this.separator = definition == null;
     if (this.separator) return;
-    
+
     this.name = definition.name;
     this.title = definition.title;
     this.caption = definition.caption;

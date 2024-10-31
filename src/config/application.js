@@ -1,4 +1,4 @@
-import { application } from "framework/config/application";
+import { application } from "app/framework/config/application";
 import { Quasar } from "quasar";
 
 export class Application {

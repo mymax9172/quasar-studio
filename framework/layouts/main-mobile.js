@@ -6,5 +6,5 @@ export default {
   },
 
   // Footer definition
-  footer: {},
+  // footer: {},
 };
