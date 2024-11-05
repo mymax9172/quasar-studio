@@ -40,11 +40,11 @@ Once installed it is required to create the /framework folder.
 This command creates a proper folder structure under the new /framework folder
 
 - framework
-	- [config](###config-folder)
+	- [config](#config-folder)
 	- [languages](###languages)
 	- [layouts](###layouts)
 	- [src](###src)
-	- [storyboard](#storyboard.js)
+	- [storyboard](#storyboard-folder)
 
 Content of this folder can be updated either manually or by using the Quasar Studio CLI tool. In both cases any change will be reflected into the live application (if running). 
 
