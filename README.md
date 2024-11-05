@@ -44,7 +44,7 @@ This command creates a proper folder structure under the new /framework folder
 	- [languages](###languages)
 	- [layouts](###layouts)
 	- [src](###src)
-	- [storyboard](#storyboard-folder)
+	- [storyboard](#storyboard)
 
 Content of this folder can be updated either manually or by using the Quasar Studio CLI tool. In both cases any change will be reflected into the live application (if running). 
 
