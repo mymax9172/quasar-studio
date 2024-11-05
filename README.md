@@ -59,11 +59,11 @@ Any error or warning will be reported in the terminal
 
 This folder contains the following js files:
 
-- [**application.js**](#application.js), global configuration of the web application
-- [**icon-library.js**](#icon-library.js), global definition of the icons uses (font-awesome, material icons libraries)
-- [**navigation.js**](#navigation.js), list of main menus of the application
-- [**storyboard.js**](#storyboard.js), where pages are defined
-- [**themes.js**](#themes.js), where all themes (styles and colors) are defined
+- [**application.js**](#applicationjs), global configuration of the web application
+- [**icon-library.js**](#icon-libraryjs), global definition of the icons uses (font-awesome, material icons libraries)
+- [**navigation.js**](#navigationjs), list of main menus of the application
+- [**storyboard.js**](#storyboardjs), where pages are defined
+- [**themes.js**](#themesjs), where all themes (styles and colors) are defined
 
 ---
 #### Application.js
