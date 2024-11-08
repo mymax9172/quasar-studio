@@ -20,17 +20,6 @@ This is the overall picture of the architectural stack of a Quasar Studio Web Ap
 3. Change your directory to the Quasar directory
 4. `$ npm install`
 
-## Installation of Quasar Studio CLI (clone git repository)
-
-Quasar Studio CLI must be installed just once (and globally)
-
-1. `$ git clone ....`
-2. Change your directory to the Quasar directory
-3. `$ npm install`
-4. `$ npm link`
-
-From now on, call qstudio from any folder that contains a Quasar application to use the CLI
-
 ## Create your first Quasar Studio Web Application
 
 Once installed it is required to create the /framework folder.
