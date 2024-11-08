@@ -72,7 +72,12 @@
             {{ $t("version") }} {{ version }}
           </div>
 
-          <div v-if="layout.header.showLanguageSwitcher">
+          <div
+            v-if="
+              layout.header.showLanguageSwitcher &&
+              $configuration.application.languages.supported.length > 1
+            "
+          >
             <qs-language-switcher />
           </div>
 
