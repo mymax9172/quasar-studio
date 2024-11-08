@@ -17,8 +17,8 @@ export class Application {
       copyright: application.credits?.copyright || "MIT",
     };
     this.version = {
-      number: application.version?.number || "0.0.1",
-      build: application.version?.build || 1,
+      number: application.versioning.version.number || "0.1",
+      build: application.versioning.version.build || 1,
       quasar: Quasar.version,
     };
     this.languages = {
