@@ -27,7 +27,7 @@ export class LayoutManager {
       let layoutName;
       layoutName = name.split("-")[0];
 
-      const definition = await import("framework/layouts/" + name + ".js");
+      const definition = await import("framework/layouts/" + name + ".mjs");
       const layout = new Layout(layoutName, deviceName, definition.default);
       this.layouts.push(layout);
     }
