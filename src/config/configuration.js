@@ -3,7 +3,7 @@ import { LanguageManager } from "./languageManager";
 import { LayoutManager } from "./layoutManager";
 import { Navigation } from "./navigation";
 import { ThemeManager } from "./themeManager";
-import { iconLibrary } from "app/framework/config/icon-library";
+import { iconLibrary } from "app/framework/config/icon-library.mjs";
 import { StoryboardManager } from "./storyboardManager";
 import { RouteManager } from "./routeManager";
 

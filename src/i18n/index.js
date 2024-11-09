@@ -1,4 +1,4 @@
-import { application } from "app/framework/config/application";
+import { application } from "app/framework/config/application.mjs";
 
 const languages = {};
 

@@ -1,4 +1,4 @@
-import { application } from "app/framework/config/application";
+import { application } from "app/framework/config/application.mjs";
 import { i18n } from "src/boot/i18n";
 import { useSettingsStore } from "src/stores/settings";
 
