@@ -30,7 +30,7 @@
             :footer="layout.footer"
           >
             <div v-if="layout.footer.showVersion">
-              {{ $t("version") }} {{ version }}
+              {{ $t("qs-version") }} {{ version }}
             </div>
           </slot>
         </div>

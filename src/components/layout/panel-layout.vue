@@ -102,7 +102,7 @@ export default {
         "bg-" +
         chain(
           "white",
-          theme[this.side + "Panel"].backcolor,
+          theme ? theme[this.side + "Panel"].backcolor : null,
           this.layout[this.side + "Panel"]?.style?.backcolor
         );
 
@@ -111,7 +111,7 @@ export default {
         "text-" +
         chain(
           "primary",
-          theme[this.side + "Panel"].textcolor,
+          theme ? theme[this.side + "Panel"].textcolor : null,
           this.layout[this.side + "Panel"]?.style?.textcolor
         );
 

@@ -30,6 +30,7 @@ export class Configuration {
 
   async initialize() {
     await this.layoutManager.initialize();
+    await this.themeManager.initialize();
     await this.storyboardManager.initialize();
     await this.routeManager.initialize(this);
   }

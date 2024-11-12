@@ -15,7 +15,7 @@
             flat
             dense
             rounded
-            :icon="icons.bars"
+            :icon="icons['qs-bars']"
             size="sm"
             @click="$emit('click', '$-left-panel')"
           />
@@ -25,7 +25,7 @@
             flat
             dense
             rounded
-            :icon="icons.home"
+            :icon="icons['qs-home']"
             size="sm"
           />
           <q-btn
@@ -34,7 +34,7 @@
             flat
             dense
             rounded
-            :icon="icons.back"
+            :icon="icons['qs-back']"
             size="sm"
           />
 
@@ -69,7 +69,7 @@
           </div>
 
           <div v-if="layout.header.showVersion">
-            {{ $t("version") }} {{ version }}
+            {{ $t("qs-version") }} {{ version }}
           </div>
 
           <div

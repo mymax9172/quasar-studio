@@ -13,16 +13,27 @@ This is the overall picture of the architectural stack of a Quasar Studio Web Ap
     - Quasar framework (/src folder)
       - Quasar Studio project (/framework folder)
 
-## Installation of Quasar Studio (clone git repository)
+## Installation of Quasar Studio Applicatiion Template (clone git repository)
 
-1. Install [npm][1]
-2. `$ git clone https://github.com/mymax9172/quasar-studio.git`
-3. Change your directory to the Quasar directory
-4. `$ npm install`
+### Prerequisites
+
+1. Install [npm][1] (if not available on your machine, check with `$ npm -v` )
+2. Install [git][2] (if not available on your machine, check with `$ git --version`)
+
+Make sure you have already installed the [Quasar Studio CLI][3]
+If you haven't yet, use the command `$ npm run cli-install` or follow the instuction on the [npm page][3]
+If you have, be sure the Quasar Studio CLI is up-to-date with the command `$ npm run cli-update`
+
+### Installation
+
+1. `$ git clone https://github.com/mymax9172/quasar-studio.git`
+2. Change directory name `quasar-studio` with whatever you prefer
+3. `$ cd <your_directory_name>`
+4. `$ qstudio install`
 
 ## Create your first Quasar Studio Web Application
 
-Once installed it is required to create the /framework folder.
+Once installed Quasar Studio Application requires a /framework folder where all your configuration is defined.
 
 `$ qstudio init`
 
@@ -34,14 +45,9 @@ This command creates a proper folder structure under the new /framework folder
   - [layouts](###layouts)
   - [src](###src)
   - [storyboard](#storyboard)
+  - [themes](#themes)
 
 Content of this folder can be updated either manually or by using the Quasar Studio CLI tool. In both cases any change will be reflected into the live application (if running).
-
-To check if the /framework folder is correct, it is possible to launch the following command:
-
-`$ qstudio check`
-
-Any error or warning will be reported in the terminal
 
 ---
 
@@ -53,7 +59,6 @@ This folder contains the following js files:
 - [**icon-library.js**](#icon-libraryjs), global definition of the icons uses (font-awesome, material icons libraries)
 - [**navigation.js**](#navigationjs), list of main menus of the application
 - [**storyboard.js**](#storyboardjs), where pages are defined
-- [**themes.js**](#themesjs), where all themes (styles and colors) are defined
 
 ---
 
@@ -65,18 +70,19 @@ An example of this file is the following:
 
 ```js
 export const application = {
+  manifestVersion: "1.0.0",
   name: "MyBlog",
   title: "MyBlog 2024",
   credits: {
     owner: "Massimiliano Agostinoni",
     copyright: "MIT",
   },
-  version: {
-    // Application version number
-    number: "0.0.1",
-
-    // Build number
-    build: 1,
+  versioning: {
+    type: "manual",
+    version: {
+      number: "0.3",
+      build: "2024111.16432",
+    },
   },
   languages: {
     default: "en-US",
@@ -86,28 +92,49 @@ export const application = {
     default: "main",
     templates: ["main", "secondary"],
   },
+  themes: {},
   entitlements: [],
 };
 ```
 
 These are the property of this file:
 
-1. **name**, this is the name of the application, is also shown on the browser tab
-2. **title**, this is the official title of the application, is also shown on header page (if the layout has an header element). This title can be overriden by the same property on the page
-3. **credits**, this is a standard object shown by the credit popup screen. A credit popup screen is shown if the user clicks on the version element (see later)
-4. **version**, this is a standard object that defines the current version of the application: - **number**, a string in the form "Major"."Minor" (i.e. '1.12') - **build**, a progressive number that define the current build.
+- **manifestVersion**, this reports the version of the Quasar Studio Framework in use, DO NOT CHANGE IT MANUALLY.
 
-   > Quasar Studio CLI has a _version_ command to upgrade the minor/major version as well as the build number
+  > Quasar Studio CLI has a _update_ command to update the framework configuration to the latest one
 
-5. **languages**, this is a standard object that defines supported languages for the application. Internazionalization is activated by default and cannot be removed: - **default**, the iso-code (i.e. en, en-US, it-IT) of the default language - **supported**, an array of supported iso-code. _(see further for language definitions)_
+- **name**, this is the name of the application, is also shown on the browser tab
+- **title**, this is the official title of the application, is also shown on header page (if the layout has an header element). This title can be overriden by the same property on the page
+- **credits**, this is a standard object shown by the credit popup screen. A credit popup screen is shown if the user clicks on the version element (see later)
+- **versioning**, this is a standard object how to manage versioning and current version of the application:
 
-   > Quasar Studio CLI has a _language_ command to quickly add a language key to all language files (value must be defined manually for each language file)
+  - **type**, versioning model. It could be _manual_ (change version manually or using Quasar Studio CLI), _auto_ (this means Quasar Studio CLI update minor version evry new build), or _date_ (this means Quasar Studio CLI update version as YEAR/MONTH of any new build)
+  - **version**, the actual version of the web application
+    - **number**, a string in the form "Major"."Minor" (i.e. '1.12')
+    - **build**, a progressive number that define the current build.
 
-6. **layouts**, this is a standard object that defines layouts adopted by the application - **default**, default layout to be used if the current page does not report a specific one - **templates**, an array of available layouts name. _(see further for layout definitions)_
+  > Quasar Studio CLI has a _version_ command to upgrade the minor/major version as well as the build number
 
-   > Quasar Studio CLI has a _layout_ command to create a new layout file
+- **languages**, this is a standard object that defines supported languages for the application. Internazionalization is activated by default and cannot be removed: - **default**, the iso-code (i.e. en, en-US, it-IT) of the default language - **supported**, an array of supported iso-code. _(see further for language definitions)_
 
-7. **entitlements**, this is an array of different entitlements (if any)
+  > Quasar Studio CLI has a _language_ command to quickly add a language key to all language files (value must be defined manually for each language file)
+
+- **layouts**, this is a standard object that defines layouts adopted by the application
+
+  - **default**, default layout to be used if the current page does not report a specific one
+  - **templates**, an array of available layouts name. _(see further for layout definitions)_
+
+  > Quasar Studio CLI has a _layout_ command to create a new layout file
+
+- **themes**, this is a standard object that defines themes used in the application
+
+  - **configurable**, set to _true_ if the end users can create custom themes. If this value is set to _false_ only defined system themes are available
+  - **default**, default theme
+  - **templates**, an array of available themes name. _(see further for themes definitions)_
+
+  > Quasar Studio CLI has a _theme_ command to create a new theme file
+
+- **entitlements**, this is an array of different entitlements (if any)
 
 ---
 
@@ -308,3 +335,5 @@ TO DO If auto-translate is activated, a first draft translation is provided.
 ---
 
 [1]: https://npmjs.org
+[2]: https://git-scm.com
+[3]: https://www.npmjs.com/package/qstudio-cli?activeTab=readme
