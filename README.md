@@ -103,8 +103,9 @@ These are the property of this file:
 
   > Quasar Studio CLI has a _update_ command to update the framework configuration to the latest one
 
-- **name**, this is the name of the application, is also shown on the browser tab
-- **title**, this is the official title of the application, is also shown on header page (if the layout has an header element). This title can be overriden by the same property on the page
+- **name**, this is the name of the application
+- **title**, this is the official title of the application
+- **tab**, this is the text in the browser tab; if not reported use the title of the application, otherwise can be a string or a function
 - **credits**, this is a standard object shown by the credit popup screen. A credit popup screen is shown if the user clicks on the version element (see later)
 - **versioning**, this is a standard object how to manage versioning and current version of the application:
 
@@ -148,16 +149,17 @@ An example of this file is the following:
 
 ```js
 export const iconLibrary = {
-  bars: "fa-solid fa-bars",
-  home: "fa-solid fa-house",
-  back: "fa-solid fa-circle-left",
-  business: "fa-solid fa-building",
+  "qs-bars": "fa-solid fa-bars",
+  "qs-home": "fa-solid fa-house",
+  "qs-back": "fa-solid fa-circle-left",
 };
 ```
 
 Each key-value pairs describes the name used into the application (i.e. bars) and the value into the icon library (i.e. "fa-solid fa-bars" in FontAwesome)
 
 By default either _FontAwesome v6_ and _Google Material_ icons library are enabled. To activate additional icon libraries please refer to this document: [How to extend icon libraries](https://quasar.dev/options/installing-icon-libraries#introduction)
+
+> Allo icons started with qs- are used by the framework itself, can be changed but DO NOT REMOVE THEM
 
 ---
 

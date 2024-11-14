@@ -1,5 +1,5 @@
 <template>
-  <q-page :class="$route.meta.page.class">
+  <q-page :class="$route.meta.page.definition.class">
     <component :is="getComponent()" />
   </q-page>
 </template>
@@ -21,7 +21,9 @@ export default {
 
   methods: {
     getComponent() {
-      return markRaw(defineAsyncComponent(this.$route.meta.page.component));
+      return markRaw(
+        defineAsyncComponent(this.storyboardPage.definition.component)
+      );
     },
   },
 };

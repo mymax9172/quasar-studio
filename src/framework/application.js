@@ -10,7 +10,7 @@ export class Application {
   entitlements;
 
   constructor() {
-    this.name = application.name || "Quasar Studio";
+    this.name = application.name || "Quasar Studio Application";
     this.title = application.title || "Quasar Application";
     this.credits = {
       owner: application.credits?.owner || "",

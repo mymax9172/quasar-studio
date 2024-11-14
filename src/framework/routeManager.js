@@ -1,8 +1,6 @@
-import { storyboard } from "app/framework/config/storyboard.mjs";
 import { Route } from "./route";
 
 export class RouteManager {
-  home;
   routes;
 
   constructor() {
@@ -11,18 +9,21 @@ export class RouteManager {
   }
 
   async initialize(configuration) {
-    for (let i = 0; i < storyboard.pages.length; i++) {
-      const page = storyboard.pages[i];
-      const storyboardPage = configuration.storyboardManager.pages.find(
-        (e) => e.name === page.name
-      );
-
+    configuration.storyboardManager.pages.forEach((storyboardPage) => {
       const route = new Route();
-      route.page = storyboardPage.page;
-      route.layout = storyboardPage.layout;
+      route.page = storyboardPage;
+      route.layout =
+        storyboardPage.layout || configuration.layoutManager.default;
+      route.type = storyboardPage.type;
       switch (storyboardPage.type) {
         case "custom":
-          route.url = page.url;
+          if (configuration.storyboardManager.home === storyboardPage) {
+            route.url = "/";
+          } else {
+            route.url =
+              storyboardPage.definition.url ||
+              "/" + storyboardPage.name.toLowerCase();
+          }
 
           break;
 
@@ -31,7 +32,7 @@ export class RouteManager {
       }
 
       this.routes.push(route);
-    }
+    });
   }
 
   getRoutes() {
@@ -54,5 +55,12 @@ export class RouteManager {
     });
 
     return routes;
+  }
+
+  findURL(pageName) {
+    const route = this.routes.find((e) => {
+      return e.page.name === pageName;
+    });
+    return route?.url;
   }
 }

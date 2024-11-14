@@ -1,15 +1,17 @@
 export class StoryboardPage {
   name;
+  title;
   type;
   layout;
   template;
-  page;
+  definition;
 
-  constructor(name, definition) {
-    this.name = name;
+  constructor(definition) {
+    this.name = definition.name;
+    this.title = definition.title;
     this.type = definition.type || "custom";
     this.template = definition.template || null;
     this.layout = definition.layout;
-    this.page = definition.page;
+    this.definition = definition.definition;
   }
 }

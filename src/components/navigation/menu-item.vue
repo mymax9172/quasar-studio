@@ -5,9 +5,9 @@
     </template>
     <template v-else>
       <template v-if="!hasChildren">
-        <q-item clickable :to="menu.to" :class="menuClass">
+        <q-item clickable :to="to" class="qstudio-navigation-menuitem" :style="menuStyle">
           <q-item-section v-if="menu.icon" avatar>
-            <q-icon :name="icons[menu.icon]" size="xs" :color="colorIcon" />
+            <q-icon :name="icons[menu.icon]" size="xs" class="qstudio-navigation-menuitem-icon" :style="iconStyle" />
           </q-item-section>
           <q-item-section>
             <q-item-label> {{ $t(menu.title) }}</q-item-label>
@@ -19,15 +19,10 @@
       </template>
 
       <template v-else>
-        <q-expansion-item
-          v-model="expanded"
-          :to="menu.to"
-          :group="group"
-          :class="menuClass"
-        >
+        <q-expansion-item v-model="expanded" :to="menu.to" :group="group" class="qstudio-navigation-menuitem">
           <template v-slot:header>
             <q-item-section v-if="hasIcon" avatar>
-              <q-icon :name="icons[menu.icon]" size="xs" :color="colorIcon" />
+              <q-icon :name="icons[menu.icon]" size="xs" class="qstudio-navigation-menuitem-icon" :style="iconStyle" />
             </q-item-section>
             <q-item-section :class="menuClass">
               <q-item-label>
@@ -41,13 +36,7 @@
 
           <div class="q-pl-sm">
             <q-list dense>
-              <menu-item
-                v-for="item in menu.items"
-                :key="item.title"
-                :menu="item"
-                :level="indentation + 1"
-                ref="menus"
-              />
+              <menu-item v-for="item in menu.items" :key="item.title" :menu="item" :level="indentation + 1" ref="menus" />
             </q-list>
           </div>
         </q-expansion-item>
@@ -58,6 +47,7 @@
 
 <script>
 import { chain } from "src/helpers/chain";
+import { getColorCode } from "src/helpers/colors";
 
 export default {
   // Name of the component
@@ -96,57 +86,45 @@ export default {
 
     // Return if this menu has sub menu items
     hasChildren() {
-      return (
-        this.menu &&
-        this.menu.hasOwnProperty("items") &&
-        this.menu.items.length > 0
-      );
+      return this.menu && this.menu.hasOwnProperty("items") && this.menu.items.length > 0;
     },
 
     // Return if the menu has an icon
     hasIcon() {
-      return (
-        this.menu && this.menu.hasOwnProperty("icon") && this.menu.icon != null
-      );
+      return this.menu && this.menu.hasOwnProperty("icon") && this.menu.icon != null;
     },
 
     // Return if the menu has a caption
     hasCaption() {
-      return (
-        this.menu &&
-        this.menu.hasOwnProperty("caption") &&
-        this.menu.caption != null
-      );
+      return this.menu && this.menu.hasOwnProperty("caption") && this.menu.caption != null;
     },
 
-    menuClass() {
-      const theme = this.$configuration.themeManager.getCurrentTheme();
+    menuStyle() {
+      let style = "";
+      if (this.menu.style?.backcolor) style += "background-color: " + getColorCode(this.menu.style?.backcolor) + " !important;";
+      if (this.menu.style?.textcolor) style += "color: " + getColorCode(this.menu.style?.textcolor) + " !important;";
 
-      // Background
-      const bg =
-        "bg-" +
-        chain("white", theme?.navigation.backcolor, this.menu.style?.backcolor);
-
-      // Textcolor
-      const text =
-        "text-" +
-        chain(
-          "primary",
-          theme?.navigation.textcolor,
-          this.menu.style?.textcolor
-        );
-
-      return bg + " " + text;
+      if (style.length > 0) return style;
+      else return undefined;
     },
 
-    colorIcon() {
-      const theme = this.$configuration.themeManager.getCurrentTheme();
+    iconStyle() {
+      let style = "";
+      if (this.menu.style?.iconcolor) style += "color: " + getColorCode(this.menu.style?.iconcolor) + " !important;";
+      if (style.length > 0) return style;
+      else return undefined;
+    },
 
-      return chain(
-        "primary",
-        theme?.navigation.iconcolor,
-        this.menu.style?.iconcolor
-      );
+    to() {
+      if (!this.menu.to) return null;
+      else {
+        if (typeof this.menu.to === "string") {
+          const routeManager = this.$configuration.routeManager;
+          const url = routeManager.findURL(this.menu.to);
+          return url;
+        }
+      }
+      return null;
     },
   },
 

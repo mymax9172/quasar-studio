@@ -4,5 +4,8 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": ["source.fixAll.eslint"],
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "prettier.printWidth": 200,
+  "editor.wordWrapColumn": 200,
+  "editor.wordWrap": "wordWrapColumn"
 }

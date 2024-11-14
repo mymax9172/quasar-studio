@@ -5,13 +5,7 @@
     </q-avatar>
     <q-menu>
       <q-list dense>
-        <q-item
-          v-close-popup
-          clickable
-          v-for="lang in languages"
-          :key="lang"
-          @click="changeLanguage(lang)"
-        >
+        <q-item v-close-popup clickable v-for="lang in languages" :key="lang" @click="changeLanguage(lang)">
           <q-item-section side>
             <span :class="'fi fi-' + getCountryCode(lang)"></span>
           </q-item-section>
@@ -30,7 +24,7 @@
 
 <script>
 export default {
-  name: "QsLanguageSwitcher",
+  name: "QsLangSwitcher",
 
   computed: {
     currentCountryClass() {

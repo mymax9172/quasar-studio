@@ -13,6 +13,7 @@ export class Layout {
   constructor(name, device, definition) {
     this.name = name;
     this.device = device;
+    
     if (definition.header) this.header = new LayoutHeader(definition.header);
     if (definition.footer) this.footer = new LayoutFooter(definition.footer);
     if (definition.leftPanel)

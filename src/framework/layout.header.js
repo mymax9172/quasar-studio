@@ -1,34 +1,42 @@
+import { itemManager } from "./itemManager";
+
 export class LayoutHeader {
-  noLeftSlot;
-  noMiddleSlot;
-  noRightSlot;
-  showHomeIcon;
-  showBackIcon;
-  showVersion;
-  showLanguageSwitcher;
+  left;
+  middle;
+  right;
   style;
-  slots;
 
   constructor(definition) {
-    this.noLeftSlot = definition.noLeftSlot || false;
-    this.noMiddleSlot = definition.noMiddleSlot || false;
-    this.noRightSlot = definition.noRightSlot || false;
+    if (definition.left) {
+      this.left = {};
+      if (definition.left.items) this.loadItems(this.left, definition.left.items);
+    }
 
-    this.showHomeIcon = definition.showHomeIcon || false;
-    this.showBackIcon = definition.showBackIcon || false;
-    this.showVersion = definition.showVersion || false;
-    this.showLanguageSwitcher = definition.showLanguageSwitcher || false;
+    if (definition.middle) {
+      this.middle = {};
+      if (definition.middle.items) this.loadItems(this.middle, definition.middle.items);
+    }
+
+    if (definition.right) {
+      this.right = {};
+      if (definition.right.items) this.loadItems(this.right, definition.right.items);
+    }
 
     this.style = {
       shadow: definition.style?.shadow || false,
       backcolor: definition.style?.backcolor,
       textcolor: definition.style?.textcolor,
     };
+  }
 
-    this.slots = {
-      left: definition.slots?.left,
-      middle: definition.slots?.middle,
-      right: definition.slots?.right,
-    };
+  loadItems(slot, items) {
+    slot.items = [];
+    items.forEach((item) => {
+      if (typeof item === "string") {
+        slot.items.push(itemManager.getItem(item));
+      } else if (typeof item === "function") {
+        slot.items.push(item);
+      }
+    });
   }
 }

@@ -40,7 +40,6 @@ export class ThemeManager {
   }
 
   setCurrentTheme(name) {
-    console.log(this.themes);
     if (this.themes.find((e) => e.name === name)) this.current = name;
     else throw new Error("Couldn't set theme " + name + " as current");
   }

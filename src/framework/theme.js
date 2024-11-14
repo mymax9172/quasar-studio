@@ -1,35 +1,37 @@
 export class Theme {
   name;
   dark;
-  header;
-  footer;
-  leftPanel;
-  rightPanel;
+  global;
+  layout;
   navigation;
 
   constructor(name, definition) {
     this.name = name;
     this.dark = definition.dark || false;
 
-    this.header = {};
-    this.header.backcolor = definition.header?.backcolor || "primary";
-    this.header.textcolor = definition.header?.textcolor || "white";
+    // Global theme
+    this.global = definition.global;
 
-    this.footer = {};
-    this.footer.backcolor = definition.footer?.backcolor || "primary";
-    this.footer.textcolor = definition.footer?.textcolor || "white";
+    // Layout theme
+    this.layout = {
+      header: {},
+      footer: {},
+      leftPanel: {},
+      rightPanel: {},
+    };
+    this.layout.header.backcolor = definition.layout?.header?.backcolor;
+    this.layout.header.textcolor = definition.layout?.header?.textcolor;
+    this.layout.footer.backcolor = definition.layout?.footer?.backcolor;
+    this.layout.footer.textcolor = definition.layout?.footer?.textcolor;
+    this.layout.leftPanel.backcolor = definition.layout?.leftPanel?.backcolor;
+    this.layout.leftPanel.textcolor = definition.layout?.leftPanel?.textcolor;
+    this.layout.rightPanel.backcolor = definition.layout?.rightPanel?.backcolor;
+    this.layout.rightPanel.textcolor = definition.layout?.rightPanel?.textcolor;
 
-    this.leftPanel = {};
-    this.leftPanel.backcolor = definition.leftPanel?.backcolor || "white";
-    this.leftPanel.textcolor = definition.leftPanel?.textcolor || "primary";
-
-    this.rightPanel = {};
-    this.rightPanel.backcolor = definition.rightPanel?.backcolor || "white";
-    this.rightPanel.textcolor = definition.rightPanel?.textcolor || "primary";
-
+    // Navigation theme
     this.navigation = {};
-    this.navigation.backcolor = definition.navigation?.backcolor || "white";
-    this.navigation.textcolor = definition.navigation?.textcolor || "primary";
-    this.navigation.iconcolor = definition.navigation?.iconcolor || "primary";
+    this.navigation.backcolor = definition.navigation?.backcolor;
+    this.navigation.textcolor = definition.navigation?.textcolor;
+    this.navigation.iconcolor = definition.navigation?.iconcolor;
   }
 }

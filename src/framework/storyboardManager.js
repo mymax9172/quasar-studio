@@ -1,24 +1,27 @@
-import { storyboard } from "app/framework/config/storyboard.mjs";
+import { application } from "app/framework/config/application.mjs";
 import { StoryboardPage } from "./storyboardPage";
 
 export class StoryboardManager {
   home;
   pages;
+  current;
 
   constructor() {
     this.home = "";
     this.pages = [];
+    this.current = null;
   }
 
   async initialize() {
-    for (let i = 0; i < storyboard.pages.length; i++) {
-      const page = storyboard.pages[i];
+    for (let i = 0; i < application.storyboard.pages.length; i++) {
+      const page = application.storyboard.pages[i];
 
-      const pageFile = (page.path ? page.path + "/" : "") + page.name + ".js";
-      const definition = (await import("framework/storyboard/" + pageFile))
+      const definition = (await import("framework/storyboard/" + page + ".js"))
         .default;
-      const storyboardPage = new StoryboardPage(page.name, definition);
+      const storyboardPage = new StoryboardPage(definition);
       this.pages.push(storyboardPage);
+
+      if (page === application.storyboard.home) this.home = storyboardPage;
     }
   }
 }
