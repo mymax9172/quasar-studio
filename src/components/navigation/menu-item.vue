@@ -5,9 +5,9 @@
     </template>
     <template v-else>
       <template v-if="!hasChildren">
-        <q-item clickable :to="to" class="qstudio-navigation-menuitem" :style="menuStyle">
+        <q-item clickable :to="menu.getURL()" class="qstudio-navigation-menuitem" :style="menuStyle" exact exact-active-class="text-weight-bold">
           <q-item-section v-if="menu.icon" avatar>
-            <q-icon :name="icons[menu.icon]" size="xs" class="qstudio-navigation-menuitem-icon" :style="iconStyle" />
+            <q-icon :name="icons.getIconName(menu.icon)" :size="icons.getIconSize(menu.icon)" class="qstudio-navigation-menuitem-icon" :style="iconStyle" />
           </q-item-section>
           <q-item-section>
             <q-item-label> {{ $t(menu.title) }}</q-item-label>
@@ -19,12 +19,12 @@
       </template>
 
       <template v-else>
-        <q-expansion-item v-model="expanded" :to="menu.to" :group="group" class="qstudio-navigation-menuitem">
+        <q-expansion-item v-model="expanded" :to="menu.getURL()" :group="group" class="qstudio-navigation-menuitem">
           <template v-slot:header>
             <q-item-section v-if="hasIcon" avatar>
-              <q-icon :name="icons[menu.icon]" size="xs" class="qstudio-navigation-menuitem-icon" :style="iconStyle" />
+              <q-icon :name="icons.getIconName(menu.icon)" :size="icons.getIconSize(menu.icon)" class="qstudio-navigation-menuitem-icon" :style="iconStyle" />
             </q-item-section>
-            <q-item-section :class="menuClass">
+            <q-item-section class="qstudio-navigation-menuitem">
               <q-item-label>
                 <b>{{ menu.title }}</b>
               </q-item-label>
@@ -64,6 +64,7 @@ export default {
       default: 0,
     },
     group: String,
+    minimize: Boolean,
   },
 
   // Data
@@ -76,7 +77,9 @@ export default {
   },
 
   // Setup the component
-  created() {},
+  created() {
+    //console.log(this.icons);
+  },
 
   // Computed properties
   computed: {
@@ -113,18 +116,6 @@ export default {
       if (this.menu.style?.iconcolor) style += "color: " + getColorCode(this.menu.style?.iconcolor) + " !important;";
       if (style.length > 0) return style;
       else return undefined;
-    },
-
-    to() {
-      if (!this.menu.to) return null;
-      else {
-        if (typeof this.menu.to === "string") {
-          const routeManager = this.$configuration.routeManager;
-          const url = routeManager.findURL(this.menu.to);
-          return url;
-        }
-      }
-      return null;
     },
   },
 

@@ -4,40 +4,10 @@
     <layout-header :layout="layout" @click="onClick" />
 
     <!-- Left Panel -->
-    <panel-layout v-if="layout.leftPanel" :layout="layout" side="left" v-model="leftPanelVisible">
-      <!-- Top slot -->
-      <template v-if="layout.leftPanel?.slots.top" v-slot:top="props">
-        <component :is="getComponent(layout.leftPanel.slots.top)" :props="props" />
-      </template>
-
-      <!-- Middle slot -->
-      <template v-if="layout.leftPanel?.slots.middle" v-slot:middle="props">
-        <component :is="getComponent(layout.leftPanel.slots.middle)" :props="props" />
-      </template>
-
-      <!-- Bottom slot -->
-      <template v-if="layout.leftPanel?.slots.bottom" v-slot:bottom="props">
-        <component :is="getComponent(layout.leftPanel.slots.bottom)" :props="props" />
-      </template>
-    </panel-layout>
+    <layout-panel v-if="layout.leftPanel" :layout="layout" side="left" v-model="leftPanelVisible" />
 
     <!-- Right Panel -->
-    <panel-layout v-if="layout.rightPanel" :layout="layout" side="right" v-model="rightPanelVisible">
-      <!-- Top slot -->
-      <template v-if="layout.rightPanel?.slots.top" v-slot:top="props">
-        <component :is="getComponent(layout.rightPanel.slots.top)" :props="props" />
-      </template>
-
-      <!-- Middle slot -->
-      <template v-if="layout.rightPanel?.slots.middle" v-slot:middle="props">
-        <component :is="getComponent(layout.rightPanel.slots.middle)" :props="props" />
-      </template>
-
-      <!-- Bottom slot -->
-      <template v-if="layout.rightPanel?.slots.bottom" v-slot:bottom="props">
-        <component :is="getComponent(layout.rightPanel.slots.bottom)" :props="props" />
-      </template>
-    </panel-layout>
+    <layout-panel v-if="layout.rightPanel" :layout="layout" side="right" v-model="rightPanelVisible" />
 
     <!-- Footer -->
     <layout-footer :layout="layout" @click="onClick" />
@@ -51,9 +21,7 @@
 <script>
 import LayoutHeader from "src/components/layout/layout-header.vue";
 import LayoutFooter from "src/components/layout/layout-footer.vue";
-
-// import FooterLayout from "src/components/layout/footer-layout.vue";
-import PanelLayout from "src/components/layout/panel-layout.vue";
+import LayoutPanel from "src/components/layout/layout-panel.vue";
 import { defineAsyncComponent, markRaw } from "vue";
 
 export default {
@@ -62,8 +30,7 @@ export default {
   components: {
     LayoutHeader,
     LayoutFooter,
-    // FooterLayout,
-    PanelLayout,
+    LayoutPanel,
   },
 
   data() {

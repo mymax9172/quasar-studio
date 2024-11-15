@@ -1,3 +1,5 @@
+import { configuration } from "src/boot/config";
+
 export class NavigationItem {
   name;
   title;
@@ -31,5 +33,17 @@ export class NavigationItem {
         this.items.push(childItem);
       });
     }
+  }
+
+  getURL() {
+    if (!this.to) return null;
+    else {
+      if (typeof this.to === "string") {
+        const routeManager = configuration.routeManager;
+        const url = routeManager.findURL(this.to);
+        return url;
+      }
+    }
+    return null;
   }
 }

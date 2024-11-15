@@ -3,9 +3,9 @@ import { LanguageManager } from "./languageManager";
 import { LayoutManager } from "./layoutManager";
 import { Navigation } from "./navigation";
 import { ThemeManager } from "./themeManager";
-import { iconLibrary } from "app/framework/config/icon-library.mjs";
 import { StoryboardManager } from "./storyboardManager";
 import { RouteManager } from "./routeManager";
+import { IconLibrary } from "./iconLibrary";
 
 export class Configuration {
   application;
@@ -19,9 +19,9 @@ export class Configuration {
 
   constructor() {
     this.application = new Application();
+    this.iconLibrary = new IconLibrary();
     this.layoutManager = new LayoutManager();
     this.themeManager = new ThemeManager();
-    this.iconLibrary = iconLibrary;
     this.navigation = new Navigation();
     this.languageManager = new LanguageManager();
     this.storyboardManager = new StoryboardManager();

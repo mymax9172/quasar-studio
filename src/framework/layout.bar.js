@@ -1,9 +1,9 @@
 import { ItemManager } from "./itemManager";
 
-export class LayoutPanel {
-  top;
+export class LayoutBar {
+  left;
   middle;
-  bottom;
+  right;
   style;
   side;
 
@@ -12,11 +12,11 @@ export class LayoutPanel {
 
     const itemManager = new ItemManager();
 
-    if (definition.top) {
-      this.top = {};
-      if (definition.top.items) {
-        this.top.items = [];
-        itemManager.loadItems(this.top.items, definition.top.items);
+    if (definition.left) {
+      this.left = {};
+      if (definition.left.items) {
+        this.left.items = [];
+        itemManager.loadItems(this.left.items, definition.left.items);
       }
     }
 
@@ -28,19 +28,18 @@ export class LayoutPanel {
       }
     }
 
-    if (definition.bottom) {
-      this.bottom = {};
-      if (definition.bottom.items) {
-        this.bottom.items = [];
-        itemManager.loadItems(this.bottom, definition.bottom.items);
+    if (definition.right) {
+      this.right = {};
+      if (definition.right.items) {
+        this.right.items = [];
+        itemManager.loadItems(this.right.items, definition.right.items);
       }
     }
 
     this.style = {
+      shadow: definition.style?.shadow || false,
       backcolor: definition.style?.backcolor,
       textcolor: definition.style?.textcolor,
-      width: definition.style?.width || 300,
-      mini: definition.style?.mini,
     };
   }
 }

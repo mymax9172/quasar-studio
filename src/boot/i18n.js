@@ -8,6 +8,7 @@ const i18n = createI18n({
   globalInjection: true,
   messages: languages,
   fallbackLocale: "en",
+  silentTranslationWarn: true,
 });
 
 export default boot(({ app }) => {

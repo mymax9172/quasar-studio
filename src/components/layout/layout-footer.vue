@@ -6,42 +6,36 @@
         <!-- Left slot -->
         <div class="col-3 q-pr-md">
           <!-- <q-btn v-if="layout.leftPanel" class="q-mr-md" flat dense rounded :icon="icons['qs-bars']" size="sm" @click="$emit('click', '$-left-panel')" /> -->
-
-          <template v-if="layout.footer.left.items">
-            <component :is="getComponent(item)" v-for="item in layout.footer.left.items" :key="item" />
-          </template>
+          <slot-handler :slot-items="layout.footer.left.items" />
         </div>
 
         <!-- Middle slot -->
         <div class="col q-px-md flex flex-center">
-          <template v-if="layout.footer.middle.items">
-            <component :is="getComponent(item)" v-for="item in layout.footer.middle.items" :key="item" />
-          </template>
+          <slot-handler :slot-items="layout.footer.middle.items" />
         </div>
 
         <!-- Right slot -->
         <div class="col-3 q-ml-md flex justify-end items-center">
-          <template v-if="layout.footer.right.items">
-            <component :is="getComponent(item)" v-for="item in layout.footer.right.items" :key="item" />
-          </template>
-
+          <slot-handler :slot-items="layout.footer.right.items" />
           <!-- <q-btn v-if="layout.rightPanel" class="q-ml-md" flat dense rounded :icon="icons['qs-bars']" size="sm" @click="$emit('click', '$-right-panel')" /> -->
         </div>
       </div>
     </q-toolbar>
 
     <!-- Navigation toolbar -->
-    <!-- <q-toolbar inset v-if="showNavigation">
-      <q-tabs dense inline-label no-caps>
-        <menu-header-item v-for="item in menuItems" :key="item.title" :menu="item" />
-      </q-tabs>
-    </q-toolbar> -->
+    <q-toolbar inset v-if="showNavigation">
+      <q-space />
+      <qs-navigation v-if="showNavigation" horizontal />
+      <q-space />
+    </q-toolbar>
   </q-footer>
 </template>
 
 <script>
-// import MenuHeaderItem from "../navigation/menu-header-item.vue";
 import MetaMixin from "src/mixins/meta-mixin.vue";
+import QsNavigation from "../public/qs-navigation.vue";
+import SlotHandler from "../helpers/slotHandler.vue";
+
 import { defineAsyncComponent, markRaw } from "vue";
 
 export default {
@@ -49,7 +43,10 @@ export default {
 
   emits: ["click"],
 
-  //components: { MenuHeaderItem, QsLanguageSwitcher },
+  components: {
+    SlotHandler,
+    QsNavigation,
+  },
 
   props: {
     layout: Object,
@@ -65,7 +62,7 @@ export default {
 
   computed: {
     showNavigation() {
-      return this.$configuration.navigation.position === "header";
+      return this.$configuration.navigation.position === "footer";
     },
 
     menuItems() {
@@ -74,8 +71,8 @@ export default {
   },
 
   methods: {
-    getComponent(fn) {
-      return markRaw(defineAsyncComponent(fn));
+    getComponent(slotItem) {
+      return markRaw(defineAsyncComponent(slotItem.component));
     },
   },
 };
