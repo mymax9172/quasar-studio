@@ -25,7 +25,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
-    boot: ["i18n", "axios", "config", "theme"],
+    boot: ["i18n", "axios", "config", "theme", "public-components"],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
     css: ["app.scss"],
@@ -69,14 +69,9 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
 
       chainWebpack(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js", "vue"] }]);
+        chain.plugin("eslint-webpack-plugin").use(ESLintPlugin, [{ extensions: ["js", "vue"] }]);
 
-        chain.resolve.alias.set(
-          "framework",
-          path.resolve(__dirname, "./framework")
-        );
+        chain.resolve.alias.set("framework", path.resolve(__dirname, "./framework"));
       },
     },
 
@@ -125,9 +120,7 @@ module.exports = configure(function (ctx) {
       // Tell browser when a file from the server should expire from cache (in ms)
 
       chainWebpackWebserver(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
+        chain.plugin("eslint-webpack-plugin").use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
 
       middlewares: [
@@ -145,9 +138,7 @@ module.exports = configure(function (ctx) {
       // if using workbox in InjectManifest mode
 
       chainWebpackCustomSW(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
+        chain.plugin("eslint-webpack-plugin").use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
 
       manifest: {
@@ -222,15 +213,11 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
 
       chainWebpackMain(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
+        chain.plugin("eslint-webpack-plugin").use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
 
       chainWebpackPreload(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
+        chain.plugin("eslint-webpack-plugin").use(ESLintPlugin, [{ extensions: ["js"] }]);
       },
     },
   };
