@@ -12,7 +12,7 @@ export class LanguageManager {
     this.multiLanguage = languages.multiLanguage || false;
     if (this.multiLanguage) {
       this.supportedLanguages = [];
-      const languageContext = require.context("qsconfig/framework/languages/", true, /\.mjs$/i);
+      const languageContext = require.context("qsconfig/languages/", true, /\.mjs$/i);
 
       languageContext.keys().forEach((e) => {
         const isocode = e.split("/").pop().split(".")[0];

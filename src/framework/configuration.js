@@ -17,12 +17,6 @@ export class Configuration {
   storyboardManager;
   routeManager;
 
-  static async check() {
-    const result = import("qsconfig");
-    console.log(result);
-    return false;
-  }
-
   constructor() {
     this.application = new Application();
     this.iconLibrary = new IconLibrary();

@@ -13,13 +13,13 @@ export class StoryboardManager {
   }
 
   async initialize() {
-    const storyboardContext = require.context("qsconfig/framework/storyboard/", true, /\.mjs$/i);
+    const storyboardContext = require.context("qsconfig/storyboard/", true, /\.mjs$/i);
 
     const keys = storyboardContext.keys();
     for (let i = 0; i < keys.length; i++) {
       const name = keys[i].split("/").pop().split(".")[0];
 
-      const definition = (await import("qsconfig/framework/storyboard/" + name + ".mjs")).default;
+      const definition = (await import("qsconfig/storyboard/" + name + ".mjs")).default;
 
       const storyboardPage = new StoryboardPage(definition);
       this.pages.push(storyboardPage);

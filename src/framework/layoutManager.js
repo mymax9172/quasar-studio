@@ -16,7 +16,7 @@ export class LayoutManager {
     const devices = ["desktop", "tablet", "mobile"];
 
     this.layouts = [];
-    const layoutContext = require.context("qsconfig/framework/layouts/", true, /\.mjs$/i);
+    const layoutContext = require.context("qsconfig/layouts/", true, /\.mjs$/i);
 
     layoutContext.keys().forEach(async (e) => {
       const name = e.split("/").pop().split(".")[0];
@@ -30,7 +30,7 @@ export class LayoutManager {
       let layoutName;
       layoutName = name.split("-")[0];
 
-      const definition = await import("qsconfig/framework/layouts/" + name + ".mjs");
+      const definition = await import("qsconfig/layouts/" + name + ".mjs");
       const layout = new Layout(layoutName, deviceName, definition.default);
       this.layouts.push(layout);
     });

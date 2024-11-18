@@ -16,12 +16,12 @@ export class ThemeManager {
     if (!themes || themes.default == null) return;
 
     this.themes = [];
-    const themeContext = require.context("qsconfig/framework/themes/", true, /\.mjs$/i);
+    const themeContext = require.context("qsconfig/themes/", true, /\.mjs$/i);
 
     themeContext.keys().forEach(async (e) => {
       const name = e.split("/").pop().split(".")[0];
 
-      const definition = await import("qsconfig/framework/themes/" + name + ".mjs");
+      const definition = await import("qsconfig/themes/" + name + ".mjs");
       const theme = new Theme(name, definition.default);
       this.themes.push(theme);
     });

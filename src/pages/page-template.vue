@@ -26,7 +26,7 @@ export default {
       if (!component) return null;
 
       if (typeof component === "string") {
-        let fn = () => import("qsconfig/framework/src/pages/" + this.storyboardPage.definition.component + ".vue");
+        let fn = () => import("qsconfig/src/pages/" + this.storyboardPage.definition.component + ".vue");
         return markRaw(defineAsyncComponent(fn));
       } else return markRaw(defineAsyncComponent(component));
 
