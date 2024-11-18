@@ -1,4 +1,4 @@
-import { application } from "app/framework/config/application.mjs";
+import { themes } from "qsconfig";
 import { Theme } from "./theme";
 
 export class ThemeManager {
@@ -13,29 +13,26 @@ export class ThemeManager {
   }
 
   async initialize() {
-    if (!application.themes || Object.keys(application.themes).length === 0)
-      return;
+    if (!themes || themes.default == null) return;
 
-    for (let i = 0; i < application.themes.templates.length; i++) {
-      const name = application.themes.templates[i];
+    this.themes = [];
+    const themeContext = require.context("qsconfig/framework/themes/", true, /\.mjs$/i);
 
-      const definition = await import("framework/themes/" + name + ".mjs");
+    themeContext.keys().forEach(async (e) => {
+      const name = e.split("/").pop().split(".")[0];
+
+      const definition = await import("qsconfig/framework/themes/" + name + ".mjs");
       const theme = new Theme(name, definition.default);
       this.themes.push(theme);
-    }
+    });
 
-    if (
-      application.themes.default &&
-      this.themes.find((e) => e.name === application.themes.default)
-    ) {
-      this.default = application.themes.default;
-    } else if (this.themes.length > 0) this.default = this.themes[0].name;
+    this.default = themes.default || this.themes[0].name;
+
     this.current = this.default;
   }
 
   getCurrentTheme() {
-    if (this.current.length > 0)
-      return this.themes.find((e) => e.name === this.current);
+    if (this.current.length > 0) return this.themes.find((e) => e.name === this.current);
     else return null;
   }
 

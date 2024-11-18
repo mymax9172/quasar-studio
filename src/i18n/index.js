@@ -1,11 +1,21 @@
-import { application } from "app/framework/config/application.mjs";
+import { languages } from "qsconfig";
 
-const languages = {};
+let supportedLanguages;
+let defaultLanguage;
 
-for (let i = 0; i < application.languages.supported.length; i++) {
-  const lang = application.languages.supported[i];
-  const file = await import("framework/languages/" + lang + ".mjs");
-  languages[lang] = file.language;
+if (languages.multiLanguage) {
+  supportedLanguages = {};
+  const languageContext = require.context("qsconfig/framework/languages/", true, /\.mjs$/i);
+
+  languageContext.keys().forEach(async (e) => {
+    const isocode = e.split("/").pop().split(".")[0];
+    const file = await import("qsconfig/framework/languages/" + isocode + ".mjs");
+    supportedLanguages[isocode] = file.language;
+  });
+  defaultLanguage = languages.default || supportedLanguages[0];
+} else {
+  defaultLanguage = null;
+  supportedLanguages = {};
 }
 
-export { languages };
+export { defaultLanguage, supportedLanguages };

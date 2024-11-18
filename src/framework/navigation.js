@@ -1,4 +1,4 @@
-import { navigation } from "app/framework/config/navigation.mjs";
+import { navigation } from "qsconfig";
 import { NavigationItem } from "./navigation.item";
 
 export class Navigation {

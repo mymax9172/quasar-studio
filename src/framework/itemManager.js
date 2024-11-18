@@ -14,8 +14,10 @@ export class ItemManager {
       case "qs-navigation":
         return () => import("src/components/public/qs-navigation.vue");
       default:
-        if (typeof value === "function") return value;
-        else return null;
+        return () => import("qsconfig/framework/src/components/" + value + ".vue");
+      //  const componentsContext = require.context("framework/src/components/", true, /\.mjs$/i);
+      // if (typeof value === "function") return value;
+      // else return null;
     }
   }
 

@@ -1,4 +1,4 @@
-import icons from "framework/config/icons.mjs";
+import { icons } from "qsconfig/framework/config/icons.mjs";
 
 export class IconLibrary {
   icons;

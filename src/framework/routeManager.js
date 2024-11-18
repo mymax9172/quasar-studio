@@ -12,17 +12,15 @@ export class RouteManager {
     configuration.storyboardManager.pages.forEach((storyboardPage) => {
       const route = new Route();
       route.page = storyboardPage;
-      route.layout =
-        storyboardPage.layout || configuration.layoutManager.default;
+      route.layout = storyboardPage.layout || configuration.layoutManager.default;
       route.type = storyboardPage.type;
+
       switch (storyboardPage.type) {
         case "custom":
           if (configuration.storyboardManager.home === storyboardPage) {
             route.url = "/";
           } else {
-            route.url =
-              storyboardPage.definition.url ||
-              "/" + storyboardPage.name.toLowerCase();
+            route.url = storyboardPage.definition.url || "/" + storyboardPage.name.toLowerCase();
           }
 
           break;
@@ -45,9 +43,7 @@ export class RouteManager {
         meta: {
           page: route.page,
         },
-        children: [
-          { path: "", component: () => import("src/pages/page-template.vue") },
-        ],
+        children: [{ path: "", component: () => import("src/pages/page-template.vue") }],
       };
       if (route.layout) item.meta.layout = route.layout;
 

@@ -1,4 +1,4 @@
-import { application } from "app/framework/config/application.mjs";
+import { layouts } from "qsconfig";
 import { Layout } from "./layout";
 
 import { Screen } from "quasar";
@@ -15,8 +15,11 @@ export class LayoutManager {
   async initialize() {
     const devices = ["desktop", "tablet", "mobile"];
 
-    for (let i = 0; i < application.layouts.templates.length; i++) {
-      const name = application.layouts.templates[i];
+    this.layouts = [];
+    const layoutContext = require.context("qsconfig/framework/layouts/", true, /\.mjs$/i);
+
+    layoutContext.keys().forEach(async (e) => {
+      const name = e.split("/").pop().split(".")[0];
 
       let deviceName = "desktop";
       if (name.includes("-")) {
@@ -27,18 +30,12 @@ export class LayoutManager {
       let layoutName;
       layoutName = name.split("-")[0];
 
-      const definition = await import("framework/layouts/" + name + ".mjs");
+      const definition = await import("qsconfig/framework/layouts/" + name + ".mjs");
       const layout = new Layout(layoutName, deviceName, definition.default);
       this.layouts.push(layout);
-    }
-    if (
-      application.layouts.default &&
-      this.layouts.find((e) => e.name === application.layouts.default)
-    ) {
-      this.default = application.layouts.default;
-    } else {
-      this.default = this.layouts[0].name;
-    }
+    });
+
+    this.default = layouts.default || this.layouts[0].name;
   }
 
   getLayout(name, device) {
@@ -49,21 +46,13 @@ export class LayoutManager {
     if (name) {
       layout = this.layouts.find((e) => e.name === name && e.device === device);
 
-      if (!layout)
-        layout = this.layouts.find(
-          (e) => e.name === name && e.device === "desktop"
-        );
+      if (!layout) layout = this.layouts.find((e) => e.name === name && e.device === "desktop");
     }
 
     if (!layout && name != this.default) {
-      layout = this.layouts.find(
-        (e) => e.name === this.default && e.device === device
-      );
+      layout = this.layouts.find((e) => e.name === this.default && e.device === device);
 
-      if (!layout)
-        layout = this.layouts.find(
-          (e) => e.name === this.default && e.device === "desktop"
-        );
+      if (!layout) layout = this.layouts.find((e) => e.name === this.default && e.device === "desktop");
     }
 
     return layout;
