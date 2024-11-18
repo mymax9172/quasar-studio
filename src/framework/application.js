@@ -1,13 +1,10 @@
-import { application } from "qsconfig";
-import { Quasar } from "quasar";
+import { application, version } from "qsconfig";
 
 export class Application {
   name;
   title;
   credits;
-  version;
-  languages;
-  entitlements;
+  versioning;
 
   constructor() {
     this.name = application.name || "Quasar Studio Application";
@@ -16,15 +13,7 @@ export class Application {
       owner: application.credits?.owner || "",
       copyright: application.credits?.copyright || "MIT",
     };
-    this.version = {
-      number: application.versioning.version.number || "0.1",
-      build: application.versioning.version.build || 1,
-      quasar: Quasar.version,
-    };
-    this.languages = {
-      default: application.languages?.default || "en-US",
-      supported: application.languages?.supported || ["en-US"],
-    };
-    this.entitlements = application.entitlements || [];
+    this.versioning = application.versioning || "manual";
+    this.version = version;
   }
 }
