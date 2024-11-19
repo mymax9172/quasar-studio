@@ -2,34 +2,44 @@
 
 Quasar Studio is a standard Quasar project that embeds a lot of preconfigured content to create enterprise web application.
 
-Instead of working on the /src folder, as usually Quasar developers do, an additional folder called /framework contains all configurations file needed to create a quasar studio web application
+Quasar Studio Web Application is a combination of a standard Quasar SPA application, named "client" and a npm package that includes all configuration needed, called "app"
 
-Quasar Studio comes with a handy CLI that helps developers to create content in the /framework folder
+A typical Quasar Studio Application has a root folder that contains two sub-folders, one for the client and another one for the app.
 
-This is the overall picture of the architectural stack of a Quasar Studio Web Application
+Quasar Studio comes with a handy CLI that helps developers to create content
 
-- HTML, CSS and JS content (vanilla apps)
-  - VueJS framework (vue app)
-    - Quasar framework (/src folder)
-      - Quasar Studio project (/framework folder)
+> Note: **CLI** stands for Console Line Interface, this means an application without a proper UI, only commands using a terminal session
 
-## Installation of Quasar Studio Applicatiion Template (clone git repository)
+## Get Started
 
 ### Prerequisites
 
-1. Install [npm][1] (if not available on your machine, check with `$ npm -v` )
-2. Install [git][2] (if not available on your machine, check with `$ git --version`)
+1. Install [NPM][1] (open a new terminal session and check with `npm -v` if it is available on your machine)
+1. Install [GIT][2] (same as avove, check with `git --version`)
+1. Install [Quasar CLI][3] (check with `quasar --version`)
+1. Install [Quasar Studio CLI][4] (check with `qstudio --version`)
 
-Make sure you have already installed the [Quasar Studio CLI][3]
-If you haven't yet, use the command `$ npm run cli-install` or follow the instuction on the [npm page][3]
-If you have, be sure the Quasar Studio CLI is up-to-date with the command `$ npm run cli-update`
+### Create a new Quasar Studio Project
 
-### Installation
+Let's assume we want to create a chat web application, named MyChat.
 
-1. `$ git clone https://github.com/mymax9172/quasar-studio.git`
-2. Change directory name `quasar-studio` with whatever you prefer
-3. `$ cd <your_directory_name>`
-4. `$ qstudio install`
+1. Open your terminal and type `qstudio init`
+
+This _init_ command allow you to create a Quasar Studio Project that contains at least two folders, one is the client (a Quasar SPA web application) and the other is teh actual application configuration.
+This command wil propmpt you 4 questions:
+
+- Quasar Studio Project folder name: Keep the default one or choose another valid (for your OS) folder name
+- Application name: this is your application name, i.e.: MyChat
+- Select one application template: A list of application template already configured, or choose ('empty' is the default one)
+- Author: your name (you can keep it empty)
+
+Once provided these answers, a new folder is created and if you change your current directory to the one just created (in this example QSProject) you will find two subfolders, named 'client' and 'app-mychat'
+
+> NEVER open or change content in the client folder, just use app-mychat
+
+Your application, even if completely empty, can be tested by typing `qstudio qs:test`
+
+SONO ARRIVATO QUI'***************************************************
 
 ## Create your first Quasar Studio Web Application
 
@@ -338,4 +348,5 @@ TO DO If auto-translate is activated, a first draft translation is provided.
 
 [1]: https://npmjs.org
 [2]: https://git-scm.com
-[3]: https://www.npmjs.com/package/qstudio-cli?activeTab=readme
+[3]: https://quasar.dev/start/quasar-cli
+[4]: https://www.npmjs.com/package/qstudio-cli
