@@ -19,18 +19,26 @@ Quasar Studio comes with a handy CLI that helps developers to create content
 1. Install [Quasar CLI][3] (check with `quasar --version`)
 1. Install [Quasar Studio CLI][4] (check with `qstudio --version`)
 
+To see all Quasar Studio CLI commands, just type `qstudio -h`
+
+> Commands in Quasar Studio CLI can have three scopes:
+>
+> - _general_, these can be run in every folder (i.e.: init, help. etc)
+> - _project_, these commands are prefixed with _qs:_ and can be run only into a Quasar Studio Project folder (i.e.: qs:test)
+> - _app_, these commanda are prefixed with _app:_ and can be run only into a Quasar Studio App folder
+
 ### Create a new Quasar Studio Project
 
 Let's assume we want to create a chat web application, named MyChat.
 
-1. Open your terminal and type `qstudio init`
+1. Open a new terminal session into a folder where you want to create the project and type `qstudio init`
 
 This _init_ command allow you to create a Quasar Studio Project that contains at least two folders, one is the client (a Quasar SPA web application) and the other is teh actual application configuration.
 This command wil propmpt you 4 questions:
 
-- Quasar Studio Project folder name: Keep the default one or choose another valid (for your OS) folder name
+- Quasar Studio Project folder name: Keep the default one (QSProject) or choose another one
 - Application name: this is your application name, i.e.: MyChat
-- Select one application template: A list of application template already configured, or choose ('empty' is the default one)
+- Select one application template: A list of application templates already configured, choose the one you prefer or keep it the defualt one ('empty' is, as name suggests, an empty application)
 - Author: your name (you can keep it empty)
 
 Once provided these answers, a new folder is created and if you change your current directory to the one just created (in this example QSProject) you will find two subfolders, named 'client' and 'app-mychat'
@@ -39,121 +47,98 @@ Once provided these answers, a new folder is created and if you change your curr
 
 Your application, even if completely empty, can be tested by typing `qstudio qs:test`
 
-SONO ARRIVATO QUI'***************************************************
+> Terminal is now blocked for serving your web application. Press CTLR-C to stop it or open a new terminal session
 
-## Create your first Quasar Studio Web Application
+#### Quasar Studio Repository
 
-Once installed Quasar Studio Application requires a /framework folder where all your configuration is defined.
+When you want to create a new web application, you can follow two approaches:
 
-`$ qstudio init`
+1. Repeat the process described above in another directory. This will create the same structure just mentioned
+1. Stay on the existing Quasar Project folder (in our example QSProject) and type `qstudio qs:new`
 
-This command creates a proper folder structure under the new /framework folder
+This command will create a new app folder at the same level of the existing one(s). With this approach you will have one _client_ folder and many _app-_ folders, one for each application. To choose which one you want to test, use the command `qstudio qs:use`
 
-- framework
-  - [config](#config-folder)
-  - [languages](###languages)
-  - [layouts](###layouts)
-  - [src](###src)
-  - [storyboard](#storyboard)
-  - [themes](#themes)
+> If your web application is running, using the qs:use command will automatically switch the browser to the right application
 
-Content of this folder can be updated either manually or by using the Quasar Studio CLI tool. In both cases any change will be reflected into the live application (if running).
+## Application structure
 
----
+Within a Quasar Studio Project folder there are at least two folders, your application is configured into the _app-_ folder.
+
+> If you use the repository approach described above, you can have multiple _app-_ folders
+
+Open a new Visual Studio Code window and select your _app-_ folder. Let's review the structure of your application:
+
+![alt text](md.images/root-folder.png)
+
+- **config** is where the majority of your app configuration is done
+- **languages** is where your app language scripts are defined
+- **layouts** is where your multiple layout (even based on device capabilities) are defined
+- **src** is where it is possible to create custom content using Quasar and VueJS capabilities
+- **storyboard** is where all pages are defined
+- **themes** is where your theme (colors) are defined
 
 ### Config folder
 
-This folder contains the following js files:
+![alt text](md.images/config-folder.png)
 
-- [**application.js**](#applicationjs), global configuration of the web application
-- [**icon-library.js**](#icon-libraryjs), global definition of the icons uses (font-awesome, material icons libraries)
-- [**navigation.js**](#navigationjs), list of main menus of the application
-- [**storyboard.js**](#storyboardjs), where pages are defined
+- [**application.mjs**](#application) is where you describe your own application
+- [**icons.mjs**](#icon-library) is where all icons are mapped
+- [**navigation.mjs**](#navigation) is where all main menus are defined
+- **version.mjs** is where your current version is stored
 
----
+#### Application
 
-#### Application.js
-
-This file exports an application JS Object with all global definitions of the Web Application
+This file (_application.mjs_) exports a standard JS Object with all global definitions of the Web Application
 
 An example of this file is the following:
 
 ```js
 export const application = {
-  manifestVersion: "1.0.0",
-  name: "MyBlog",
-  title: "MyBlog 2024",
+  // Manifest version of this framework
+  manifestVersion: "0.1.1",
+
+  // Name of the application
+  name: "<name>",
+
+  // Title (Public name) of the application
+  title: "<title>",
+
+  // Credits
   credits: {
-    owner: "Massimiliano Agostinoni",
+    author: "",
     copyright: "MIT",
   },
-  versioning: {
-    type: "manual",
-    version: {
-      number: "0.3",
-      build: "2024111.16432",
-    },
-  },
-  languages: {
-    default: "en-US",
-    supported: ["en-US", "it-IT"],
-  },
-  layouts: {
-    default: "main",
-    templates: ["main", "secondary"],
-  },
-  themes: {},
-  entitlements: [],
+
+  // Versioning mode
+  versioning: "manual",
 };
 ```
 
 These are the property of this file:
 
-- **manifestVersion**, this reports the version of the Quasar Studio Framework in use, DO NOT CHANGE IT MANUALLY.
+- **manifestVersion**, this reports the version of the Quasar Studio Application Framework in use, **DO NOT CHANGE IT MANUALLY**
 
-  > Quasar Studio CLI has a _update_ command to update the framework configuration to the latest one
+  > Quasar Studio CLI has a _qs:update_ command to update the framework configuration to the latest one
 
 - **name**, this is the name of the application
-- **title**, this is the official title of the application
-- **tab**, this is the text in the browser tab; if not reported use the title of the application, otherwise can be a string or a function
+- **title**, this is the official title of the application (if missing _name_ will be used)
 - **credits**, this is a standard object shown by the credit popup screen. A credit popup screen is shown if the user clicks on the version element (see later)
-- **versioning**, this is a standard object how to manage versioning and current version of the application:
+- **versioning**, this is how versioning will be handled in your application:
 
-  - **type**, versioning model. It could be _manual_ (change version manually or using Quasar Studio CLI), _auto_ (this means Quasar Studio CLI update minor version evry new build), or _date_ (this means Quasar Studio CLI update version as YEAR/MONTH of any new build)
-  - **version**, the actual version of the web application
-    - **number**, a string in the form "Major"."Minor" (i.e. '1.12')
-    - **build**, a progressive number that define the current build.
+  - _manual_, this means you have to take care of it by changing manually the version (_version.mjs_ file)
 
-  > Quasar Studio CLI has a _version_ command to upgrade the minor/major version as well as the build number
+  > Quasar Studio CLI has a _app:version_ command to update the version
 
-- **languages**, this is a standard object that defines supported languages for the application. Internazionalization is activated by default and cannot be removed: - **default**, the iso-code (i.e. en, en-US, it-IT) of the default language - **supported**, an array of supported iso-code. _(see further for language definitions)_
-
-  > Quasar Studio CLI has a _language_ command to quickly add a language key to all language files (value must be defined manually for each language file)
-
-- **layouts**, this is a standard object that defines layouts adopted by the application
-
-  - **default**, default layout to be used if the current page does not report a specific one
-  - **templates**, an array of available layouts name. _(see further for layout definitions)_
-
-  > Quasar Studio CLI has a _layout_ command to create a new layout file
-
-- **themes**, this is a standard object that defines themes used in the application
-
-  - **configurable**, set to _true_ if the end users can create custom themes. If this value is set to _false_ only defined system themes are available
-  - **default**, default theme
-  - **templates**, an array of available themes name. _(see further for themes definitions)_
-
-  > Quasar Studio CLI has a _theme_ command to create a new theme file
-
-- **entitlements**, this is an array of different entitlements (if any)
+  - _auto_, this means Quasar Studio CLI update the version anytime a new build is created, using the MAJOR.MINOR.PATCH progression (i.e.: 1.4.2)
+  - _date_, this means Quasar Studio CLI update the version anytime a new buils is created, using the YEAR/MONTH progression (i.e: 2408 equals to Aug 2024)
 
 ---
 
-#### Icon Library.js
+#### Icon Library
 
-This file exports an iconLibrary JS Object where all icons used by the application are listed.
+This file (_icons.mjs_) exports an iconLibrary JS Object where all icons used by the application are listed.
 
-> Some of them might be used by preconfigured content, if removed a default icon will be shown instead
+> Some of them (prefixed with _qs-_) might be used by preconfigured content, if removed a default icon will be shown instead.
 
 An example of this file is the following:
 
@@ -165,44 +150,31 @@ export const iconLibrary = {
 };
 ```
 
-Each key-value pairs describes the name used into the application (i.e. bars) and the value into the icon library (i.e. "fa-solid fa-bars" in FontAwesome)
+Each key-value pairs describes the name used into the application (i.e. qs-bars) and the value into the icon library (i.e. "fa-solid fa-bars" in FontAwesome)
 
 By default either _FontAwesome v6_ and _Google Material_ icons library are enabled. To activate additional icon libraries please refer to this document: [How to extend icon libraries](https://quasar.dev/options/installing-icon-libraries#introduction)
 
-> Allo icons started with qs- are used by the framework itself, can be changed but DO NOT REMOVE THEM
-
 ---
 
-#### Navigation.js
+#### Navigation
 
-This file exports a navigation JS Object where it is described navigation menus items.
+This file (_navigation.mjs_) exports a standard JS Object where it is described navigation menus items.
 
 An example of this file is the following:
 
 ```js
 export const navigation = {
   position: "panel",
+
   items: [
     {
-      name: "customers",
-      title: "customers",
-      caption: "customers",
-      icon: "business",
-      to: "/client/organization/view",
-      style: {
-        iconcolor: "accent",
-      },
+      name: "home",
+      title: "Home",
+      icon: "qs-home",
+      to: "home-page",
     },
     {
-      name: "suppliers",
-      title: "suppliers",
-      caption: "suppliers",
-      icon: "business",
-      to: "/client/organization/view",
-      style: {
-        iconcolor: "accent",
-      },
-      items: [],
+      ...
     },
   ],
 };
@@ -210,25 +182,30 @@ export const navigation = {
 
 These are the property of this file:
 
-1. **position**, this is where the navigation menu is shown. Two options:
-   - _panel_, this means the left panel section of the layout (vertical menu);
-   - _header_, this means the header section of the layout (horizontal menu)
+1. **position**, this is where the navigation menu is shown.
+
+- _none_, this means the navigation menu is not automatically shown and must be included, manually, in any part of the layout/page (see _public components_)
+- _header_, this means the navigation menu will be placed within the header section of the layout (horizontal menu)
+- _footer_, this means the navigation menu will be placed within the footer section of the layout (horizontal menu)
+- _left_, this means the navigation menu will be placed within the left panel section (middle slot) of the layout (vertical menu)
+- _right_, this means the navigation menu will be placed within the right panel section (middle slot) of the layout (vertical menu)
 
 > Vertical menu can contains unlimited number of nested submenus (see later), but practically the available space suggests to keep these levels above 3
 
-> Horizontal menu shows only top level menu items, submenus are shown only once clicked on the parent menu level
+> Horizontal menu shows only top level menu items, submenus are simply ignored
 
-2. **items**, this is an array of menu items (see later).
+2. **items**, this is an array of menu items. Let's see how to define a menu item
 
-**Menu Item**
+##### Menu Item
+
 A menu item is a standard JS object that describes how the menu item is shown and interact with the user.
 These are the property of a menu item:
 
 - **name**, a unique name of the menu item. This will be used to define what actions should be executed when the user clicks on it
-- **title**, this is the title of the menu item, this should be a key of language files
-- **caption**, this is the subtitle (optional), referring to a key of language files
+- **title**, this is the title of the menu item (in case of multi-lingual, this should be a key of language files)
+- **caption**, this is the subtitle (optional) (see above for multi-lingual)
 - **icon**, icon to be shown (optional), referring to an icon in the icon library
-- **to**, the path where redirect the navigation (optional)
+- **to**, name of the page where redirecting (optional)
 - **style**, this is a standard JS object that defines a specific style for the menu item:
   - _backcolor_, color of the background
   - _textcolor_, color of the foreground
@@ -236,7 +213,110 @@ These are the property of a menu item:
 
 > Style defined at this level overrides any style defined at the theme level
 
-- **items**, this is an array of submenenu items (optional)
+- **items**, this is an array of sub menu-items (optional)
+
+---
+
+#### Version
+
+This file (_version.mjs_) exports a standard JS Object where it is defined the current application version.
+
+An example of this file is the following:
+
+```js
+export const version = {
+  number: "1.1.0",
+  build: "454587",
+};
+```
+
+These are the property of this file:
+
+1. **number**, this is the current version. Can be expressed in several shapes, depending of the versioning type choosen in the _application.mjs_ file:
+
+- _manual_, any string is correct. This must be manually changed.
+- _auto_, version is updated automatically anytime a new build is created. The form is Major.Minor.Patch
+
+  > Major number should be increased when a an substantially new version is released
+  > Minor number should be increased when some changes occurred
+  > Patch number should be increased when bugs are fixed or very minor changed occurred
+
+- _date_, version is updated automatically anytime a new build is created. The form is YearMonth
+  > This type of versioning helps to understand the timeline of the product. In fact, releasing a new version in Mar 2025 will have a new version 2503
+
+1. **build**, this is an incremental build number (automatically generated unless the versioning type _manual_ is selected)
+   > A build number helps developers to understand the exact build version
+
+If versioning type is _manual_, it is possible to use the Quasar Studio CLI to update the version, using the following command: `qstudio app:version [options]` (see the command help to understand how to change the version)
+
+If versioning type is _auto_ or _date_ version will be updated once created a new release with the build command: `qstudio qs:build [options]` (see the command help to understand how to change the version)
+
+---
+
+### Language folder
+
+![alt text](md.images/language-folder.png)
+
+This folder contains an _index.js_ file and optionally some language files, with their isocode name
+
+> Isocode can be in the following form:
+> [Language] for example en, fr, it
+> [Language]-[Country] for example en-us, fr-ca, it-IT
+
+The index file contains settings to activate or not the multi-lingual capabilities
+
+An example of this file is the following:
+
+```js
+export const languages = {
+  multiLanguage: false,
+};
+```
+
+> By default multilingual support is turned off.
+
+By setting the property multiLanguage to _true_ this enables support for multiple languages. In that case an additional property must be added to define the default language
+
+```js
+export const languages = {
+  multiLanguage: true,
+  default: "en-us",
+};
+```
+
+Within this folder all language file are structured in the following format:
+
+```js
+export const language = {
+  "qs-version": "Version",
+};
+```
+
+> keys prefixed with _qs-_ are used by preconfigured, DO NOT REMOVE IT
+
+##### How to use it
+
+In order to use this translations in your custom Vue components, please use `$t(<your-key>)`
+
+##### How to create a new language
+
+In case you want to support another language, use the command `qstudio app:language -a <isocode>`
+For example to add support for canadian french, type `app:language -a fr-ca`
+This creates a new file (_fr_ca.mjs_)in this folder with all keys available from the default language file.
+
+> Values must be translated
+
+##### How to remove support for a language
+
+Type the following command `qstudio app:language -r <isocode>`
+
+##### How to add a new key
+
+Adding a key to all language files could be annoying, just type the following command `qstudio app:language -ak <key` to add the same key to all available language files
+
+##### How to remove a key
+
+Type the following command `qstudio app:language -rk <key` to remove the key from all available language files
 
 ---
 
