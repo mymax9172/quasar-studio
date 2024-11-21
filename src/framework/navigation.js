@@ -1,5 +1,5 @@
 import { navigation } from "qsconfig";
-import { NavigationItem } from "./navigation.item";
+import { NavigationItem } from "./navigationItem";
 
 export class Navigation {
   position;
