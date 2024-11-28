@@ -16,10 +16,18 @@ export default {
 
   methods: {
     getComponent(slotItem) {
-      if (typeof slotItem.component === "string") {
-        return slotItem.component;
+      if (typeof slotItem === "object") {
+        if (typeof slotItem.component === "string") {
+          return slotItem.component;
+        } else {
+          return markRaw(defineAsyncComponent(slotItem.component));
+        }
       } else {
-        return markRaw(defineAsyncComponent(slotItem.component));
+        if (typeof slotItem === "string") {
+          return slotItem;
+        } else {
+          return markRaw(defineAsyncComponent(slotItem));
+        }
       }
     },
   },
