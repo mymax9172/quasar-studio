@@ -42,7 +42,7 @@ export default {
   },
 
   created() {
-    // Retrieve the current layout to be use (search in the route meta if any specific layout)
+    // Retrieve the current layout to be used (search in the route meta if any specific layout)
     this.layout = this.$configuration.layoutManager.getLayout(this.$route.meta.layout);
   },
 

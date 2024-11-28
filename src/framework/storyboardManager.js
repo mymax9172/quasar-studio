@@ -1,4 +1,3 @@
-import { storyboard } from "qsconfig";
 import { StoryboardPage } from "./storyboardPage";
 
 export class StoryboardManager {
@@ -13,18 +12,18 @@ export class StoryboardManager {
   }
 
   async initialize() {
-    const storyboardContext = require.context("qsconfig/storyboard/", true, /\.mjs$/i);
+    // Read the storyboard
+    const { storyboard } = await import("qsconfig/storyboard");
 
-    const keys = storyboardContext.keys();
-    for (let i = 0; i < keys.length; i++) {
-      const name = keys[i].split("/").pop().split(".")[0];
+    // Get the home
+    this.home = new StoryboardPage(storyboard.home);
+    this.pages.push(this.home);
 
-      const definition = (await import("qsconfig/storyboard/" + name + ".mjs")).default;
-
-      const storyboardPage = new StoryboardPage(definition);
+    // Get all other pages
+    for (let i = 0; i < storyboard.pages.length; i++) {
+      const pageDefinition = storyboard.pages[i];
+      const storyboardPage = new StoryboardPage(pageDefinition);
       this.pages.push(storyboardPage);
-
-      if (name === storyboard.home) this.home = storyboardPage;
     }
   }
 }
