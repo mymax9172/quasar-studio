@@ -16,7 +16,11 @@ export default {
 
   methods: {
     getComponent(slotItem) {
-      return markRaw(defineAsyncComponent(slotItem.component));
+      if (typeof slotItem.component === "string") {
+        return slotItem.component;
+      } else {
+        return markRaw(defineAsyncComponent(slotItem.component));
+      }
     },
   },
 };
