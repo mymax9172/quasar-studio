@@ -1,4 +1,5 @@
 import { Layout } from "./layout";
+import { Screen } from "quasar";
 
 export class LayoutManager {
   layouts;
