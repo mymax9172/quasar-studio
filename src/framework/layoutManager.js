@@ -1,3 +1,5 @@
+import { Layout } from "./layout";
+
 export class LayoutManager {
   layouts;
   defaults;
