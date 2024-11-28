@@ -15,18 +15,16 @@ export class RouteManager {
       route.layout = storyboardPage.layout || configuration.layoutManager.default;
       route.type = storyboardPage.type;
 
-      switch (storyboardPage.type) {
-        case "custom":
-          if (configuration.storyboardManager.home === storyboardPage) {
-            route.url = "/";
-          } else {
+      if (configuration.storyboardManager.home.name === storyboardPage.name) route.url = "/";
+      else {
+        switch (storyboardPage.type) {
+          case "custom":
             route.url = storyboardPage.definition.url || "/" + storyboardPage.name.toLowerCase();
-          }
+            break;
 
-          break;
-
-        default:
-          break;
+          default:
+            break;
+        }
       }
 
       this.routes.push(route);
