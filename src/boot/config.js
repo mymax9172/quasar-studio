@@ -4,18 +4,20 @@ import { useSettingsStore } from "src/stores/settings";
 
 console.log("Boot file: config");
 
-// Check if a proper configuration exists
 let configuration;
 try {
   // Load default configuration
   configuration = new Configuration();
+  console.log(configuration);
   await configuration.initialize();
 } catch (error) {}
 
-export default boot(({ app, redirect }) => {
+export default boot(async ({ app, redirect }) => {
   console.log("Executing boot file: config");
+
   // Check configuration is valid
   if (configuration == null) return;
+  configuration.setup(useSettingsStore());
 
   // Check current settings
   const settings = useSettingsStore();
@@ -28,14 +30,16 @@ export default boot(({ app, redirect }) => {
     }
   } else settings.theme = configuration.themeManager.current;
 
-  if (settings.language) {
+  // Locale handling
+  if (settings.locale) {
     try {
-      configuration.languageManager.setCurrentLanguage(settings.language);
+      configuration.localeManager.setCurrentLocale(settings.locale);
     } catch (error) {
-      settings.language = configuration.languageManager.current;
+      settings.locale = configuration.localeManager.current;
     }
-  } else settings.language = configuration.languageManager.current;
+  } else settings.locale = configuration.localeManager.current;
 
+  // Store settings in VueJS
   app.config.globalProperties.$configuration = configuration;
 });
 

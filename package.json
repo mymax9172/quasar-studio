@@ -23,6 +23,7 @@
     "pouchdb-find": "^9.0.0",
     "qsconfig": "file:../app-dev",
     "quasar": "^2.6.0",
+    "quasarstudio": "file:../quasarstudio",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
     "vue-router": "^4.0.0"

@@ -11,6 +11,7 @@ import { configuration } from "src/boot/config";
  * async/await or return a Promise which resolves
  * with the Router instance.
  */
+
 const rs = configuration.routeManager.getRoutes();
 const routeList = rs.concat(routes);
 
@@ -27,6 +28,6 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE),
   });
 
-  console.log("** Defined routes", Router.options.routes);
+  //console.log("** Defined routes", Router.options.routes);
   return Router;
 });

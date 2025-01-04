@@ -12,7 +12,7 @@ export class RouteManager {
     configuration.storyboardManager.pages.forEach((storyboardPage) => {
       const route = new Route();
       route.page = storyboardPage;
-      route.layout = storyboardPage.layout || configuration.layoutManager.default;
+      route.layout = storyboardPage.layout || configuration.layoutManager.getLayout();
       route.type = storyboardPage.type;
 
       if (configuration.storyboardManager.home.name === storyboardPage.name) route.url = "/";
@@ -26,7 +26,6 @@ export class RouteManager {
             break;
         }
       }
-
       this.routes.push(route);
     });
   }
@@ -37,7 +36,7 @@ export class RouteManager {
     this.routes.forEach((route) => {
       let item = {
         path: route.url,
-        component: () => import("layouts/layout-template.vue"),
+        component: route.layout,
         meta: {
           page: route.page,
         },
