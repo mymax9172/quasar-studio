@@ -1,4 +1,4 @@
-import { ItemManager } from "./itemManager";
+import { ItemManager } from "../itemManager";
 
 export class LayoutPanel {
   top;

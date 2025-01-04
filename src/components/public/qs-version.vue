@@ -14,5 +14,11 @@ export default {
       return this.$configuration.application.version.number;
     },
   },
+
+  methods: {
+    log() {
+      console.log(this.$t("qs-version"));
+    },
+  },
 };
 </script>

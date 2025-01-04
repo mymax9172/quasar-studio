@@ -10,18 +10,11 @@ export class LanguageManager {
 
   constructor() {
     this.multiLanguage = languages.multiLanguage || false;
+    this.default = languages.default;
     if (this.multiLanguage) {
-      this.supportedLanguages = [];
-      const languageContext = require.context("qsconfig/languages/", true, /\.mjs$/i);
-
-      languageContext.keys().forEach((e) => {
-        const isocode = e.split("/").pop().split(".")[0];
-        this.supportedLanguages.push(isocode);
-      });
-
-      this.default = languages.default || this.supportedLanguages[0];
-      this.current = this.default;
+      this.supportedLanguages = languages.supported;
     }
+    this.current = this.default.isocode;
   }
 
   getLanguageName(isocode) {
@@ -30,8 +23,12 @@ export class LanguageManager {
   }
 
   setCurrentLanguage(isocode) {
-    if (this.supportedLanguages.includes(isocode)) {
-      this.current = isocode;
+    if (!this.multiLanguage) return;
+
+    const language = this.supportedLanguages.find((e) => e.isocode === isocode);
+
+    if (language) {
+      this.current = language.isocode;
       i18n.global.locale = isocode;
       const settingsStore = useSettingsStore();
       settingsStore.language = isocode;

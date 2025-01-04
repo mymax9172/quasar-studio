@@ -1,23 +1,34 @@
 import { boot } from "quasar/wrappers";
 import { createI18n } from "vue-i18n";
-import { defaultLanguage, supportedLanguages } from "src/i18n";
+import { languages } from "qsconfig";
 
+console.log("Boot file: i18n");
+
+// Retrieve supported languages
 let i18n;
-if (defaultLanguage != null) {
+const messages = {};
+languages.supported.forEach((language) => {
+  messages[language.isocode] = language;
+});
+
+// Create i18n instance
+if (languages.multiLanguage) {
   i18n = createI18n({
-    locale: defaultLanguage,
+    locale: languages.default.isocode,
     globalInjection: true,
-    messages: supportedLanguages,
+    messages,
     fallbackLocale: "en",
     silentTranslationWarn: true,
   });
 }
 
 export default boot(({ app }) => {
-  if (defaultLanguage != null) {
+  console.log("Executing boot file: i18n");
+  if (languages.multiLanguage) {
     // Set i18n instance on app
     app.use(i18n);
   } else {
+    // Placeholder for non-multilanguage apps
     app.config.globalProperties.$t = (key) => {
       return key;
     };

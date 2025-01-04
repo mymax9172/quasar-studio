@@ -2,6 +2,8 @@ import { boot } from "quasar/wrappers";
 import { Configuration } from "src/framework/configuration";
 import { useSettingsStore } from "src/stores/settings";
 
+console.log("Boot file: config");
+
 // Check if a proper configuration exists
 let configuration;
 try {
@@ -11,11 +13,10 @@ try {
 } catch (error) {}
 
 export default boot(({ app, redirect }) => {
-
+  console.log("Executing boot file: config");
   // Check configuration is valid
-  if (configuration == null) {
+  if (configuration == null) return;
 
-  }
   // Check current settings
   const settings = useSettingsStore();
 

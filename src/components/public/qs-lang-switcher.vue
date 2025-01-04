@@ -1,5 +1,5 @@
 <template>
-  <q-btn flat round>
+  <q-btn flat round v-if="active">
     <q-avatar size="md">
       <span :class="currentCountryClass"></span>
     </q-avatar>
@@ -27,7 +27,13 @@ export default {
   name: "QsLangSwitcher",
 
   computed: {
+    active() {
+      return this.$configuration.languageManager.multiLanguage;
+    },
+
     currentCountryClass() {
+      if (!this.$configuration.languageManager.multiLanguage) return;
+
       const isocode = this.$i18n.locale;
       const countrycode = isocode.split("-")[1].toLowerCase();
       return "fi fi-" + countrycode;
@@ -39,18 +45,18 @@ export default {
   },
 
   methods: {
-    getLanguageName(isocode) {
-      return this.$configuration.languageManager.getLanguageName(isocode);
+    getLanguageName(language) {
+      return this.$configuration.languageManager.getLanguageName(language.isocode);
     },
 
-    getCountryCode(isocode) {
-      const countrycode = isocode.split("-")[1].toLowerCase();
+    getCountryCode(language) {
+      const countrycode = language.isocode.split("-")[1].toLowerCase();
       return countrycode;
     },
 
-    changeLanguage(isocode) {
-      this.$i18n.locale = isocode;
-      this.$configuration.languageManager.setCurrentLanguage(isocode);
+    changeLanguage(language) {
+      this.$i18n.locale = language.isocode;
+      this.$configuration.languageManager.setCurrentLanguage(language.isocode);
     },
   },
 };
