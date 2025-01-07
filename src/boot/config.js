@@ -8,7 +8,6 @@ let configuration;
 try {
   // Load default configuration
   configuration = new Configuration();
-  console.log(configuration);
   await configuration.initialize();
 } catch (error) {}
 

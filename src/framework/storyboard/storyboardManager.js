@@ -13,7 +13,7 @@ export class StoryboardManager {
 
   async initialize() {
     // Read the storyboard
-    const { storyboard } = await import("qsconfig/storyboard");
+    const { storyboard } = await import("qsconfig/src/storyboard/index");
 
     // Get the home
     this.home = new StoryboardPage(storyboard.home);

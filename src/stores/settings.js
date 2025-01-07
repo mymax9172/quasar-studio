@@ -19,5 +19,16 @@ export const useSettingsStore = defineStore("settings", {
         this.router.go(0);
       }
     },
+
+    /**
+     * Set current theme and refresh page
+     * @param {String} theme Theme name
+     */
+    setTheme(theme) {
+      if (theme != this.theme) {
+        this.theme = theme;
+        this.router.go(0);
+      }
+    },
   },
 });

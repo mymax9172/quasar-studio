@@ -1,44 +1,44 @@
-// app global css in SCSS form
-:root {
-  // Layout variables
-  --q-qstudio-layout-header-background: #1976d2;
-  --q-qstudio-layout-header-color: #ffffff;
-  --q-qstudio-layout-footer-background: #1976d2;
-  --q-qstudio-layout-footer-color: #ffffff;
-  --q-qstudio-layout-leftpanel-background: #ffffff;
-  --q-qstudio-layout-leftpanel-color: #1976d2;
-  --q-qstudio-layout-rightpanel-background: #ffffff;
-  --q-qstudio-layout-rightpanel-color: #1976d2;
-  --q-qstudio-navigation-background: #ffffff;
-  --q-qstudio-navigation-color: #1976d2;
-  --q-qstudio-navigation-iconcolor: #1976d2;
-}
+// // app global css in SCSS form
+// :root {
+//   // Layout variables
+//   --q-qstudio-layout-header-background: #1976d2;
+//   --q-qstudio-layout-header-color: #ffffff;
+//   --q-qstudio-layout-footer-background: #1976d2;
+//   --q-qstudio-layout-footer-color: #ffffff;
+//   --q-qstudio-layout-leftpanel-background: #ffffff;
+//   --q-qstudio-layout-leftpanel-color: #1976d2;
+//   --q-qstudio-layout-rightpanel-background: #ffffff;
+//   --q-qstudio-layout-rightpanel-color: #1976d2;
+//   --q-qstudio-navigation-background: #ffffff;
+//   --q-qstudio-navigation-color: #1976d2;
+//   --q-qstudio-navigation-iconcolor: #1976d2;
+// }
 
-.qstudio-layout-header {
-  background: var(--q-qstudio-layout-header-background) !important;
-  color: var(--q-qstudio-layout-header-color) !important;
-}
+// .qstudio-layout-header {
+//   background: var(--q-qstudio-layout-header-background) !important;
+//   color: var(--q-qstudio-layout-header-color) !important;
+// }
 
-.qstudio-layout-footer {
-  background: var(--q-qstudio-layout-footer-background) !important;
-  color: var(--q-qstudio-layout-footer-color) !important;
-}
+// .qstudio-layout-footer {
+//   background: var(--q-qstudio-layout-footer-background) !important;
+//   color: var(--q-qstudio-layout-footer-color) !important;
+// }
 
-.qstudio-layout-leftpanel {
-  background: var(--q-qstudio-layout-leftpanel-background) !important;
-  color: var(--q-qstudio-layout-leftpanel-color) !important;
-}
+// .qstudio-layout-leftpanel {
+//   background: var(--q-qstudio-layout-leftpanel-background) !important;
+//   color: var(--q-qstudio-layout-leftpanel-color) !important;
+// }
 
-.qstudio-layout-rightpanel {
-  background: var(--q-qstudio-layout-rightpanel-background) !important;
-  color: var(--q-qstudio-layout-rightpanel-color) !important;
-}
+// .qstudio-layout-rightpanel {
+//   background: var(--q-qstudio-layout-rightpanel-background) !important;
+//   color: var(--q-qstudio-layout-rightpanel-color) !important;
+// }
 
-.qstudio-navigation-menuitem {
-  background: var(--q-qstudio-navigation-background) !important;
-  color: var(--q-qstudio-navigation-color) !important;
-}
+// .qstudio-navigation-menuitem {
+//   background: var(--q-qstudio-navigation-background) !important;
+//   color: var(--q-qstudio-navigation-color) !important;
+// }
 
-.qstudio-navigation-menuitem-icon {
-  color: var(--q-qstudio-navigation-iconcolor) !important;
-}
+// .qstudio-navigation-menuitem-icon {
+//   color: var(--q-qstudio-navigation-iconcolor) !important;
+// }

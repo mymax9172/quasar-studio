@@ -1,19 +1,18 @@
 import { Application } from "./application";
-//import { LayoutManager } from "./ui/layout/layoutManager";
 import { Navigation } from "./ui/navigation/navigation";
-import { ThemeManager } from "./ui/theme/themeManager";
 import { StoryboardManager } from "./storyboard/storyboardManager";
 import { RouteManager } from "./routing/routeManager";
 import { IconLibrary } from "./ui/iconLibrary";
 import { Architecture, architecture } from "./architecture/architecture";
 
 import { QuasarStudio } from "quasarstudio";
-import { locales, layouts } from "qsconfig";
+import { locales, layouts, themes } from "qsconfig";
 
 import { i18n } from "src/boot/i18n";
 
-const LocaleManager = QuasarStudio.Framework.Locales.LocaleManager;
-const LayoutManager = QuasarStudio.Framework.Layouts.LayoutManager;
+const LocaleManager = QuasarStudio.Intl.LocaleManager;
+const LayoutManager = QuasarStudio.UI.LayoutManager;
+const ThemeManager = QuasarStudio.UI.ThemeManager;
 
 export class Configuration {
   application;
@@ -34,19 +33,17 @@ export class Configuration {
 
     this.iconLibrary = new IconLibrary();
 
-    this.layoutManager = new LayoutManager(layouts);
-
-    this.themeManager = new ThemeManager();
-    this.navigation = new Navigation();
-
     this.localeManager = new LocaleManager(locales, i18n);
+    this.layoutManager = new LayoutManager(layouts);
+    this.themeManager = new ThemeManager(themes);
+
+    this.navigation = new Navigation();
 
     this.storyboardManager = new StoryboardManager();
     this.routeManager = new RouteManager();
   }
 
   async initialize() {
-    await this.themeManager.initialize();
     await this.storyboardManager.initialize();
     await this.routeManager.initialize(this);
   }
@@ -54,9 +51,14 @@ export class Configuration {
   setup(settings) {
     this.settings = settings;
     this.localeManager.addListener("change", this.onChangeLocale.bind(this));
+    this.themeManager.addListener("change", this.onChangeTheme.bind(this));
   }
 
   onChangeLocale(sender, args) {
     this.settings.setLocale(args.isocode);
+  }
+
+  onChangeTheme(sender, args) {
+    this.settings.setTheme(args.name);
   }
 }
