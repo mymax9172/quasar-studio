@@ -2,17 +2,17 @@ import { Application } from "./application";
 import { Navigation } from "./ui/navigation/navigation";
 import { StoryboardManager } from "./storyboard/storyboardManager";
 import { RouteManager } from "./routing/routeManager";
-import { IconLibrary } from "./ui/iconLibrary";
 import { Architecture, architecture } from "./architecture/architecture";
 
 import { QuasarStudio } from "quasarstudio";
-import { locales, layouts, themes } from "qsconfig";
+import { locales, layouts, themes, icons } from "qsconfig";
 
 import { i18n } from "src/boot/i18n";
 
 const LocaleManager = QuasarStudio.Intl.LocaleManager;
 const LayoutManager = QuasarStudio.UI.LayoutManager;
 const ThemeManager = QuasarStudio.UI.ThemeManager;
+const IconLibrary = QuasarStudio.UI.IconLibrary;
 
 export class Configuration {
   application;
@@ -31,7 +31,7 @@ export class Configuration {
     this.application = new Application();
     this.architecture = new Architecture();
 
-    this.iconLibrary = new IconLibrary();
+    this.iconLibrary = new IconLibrary(icons);
 
     this.localeManager = new LocaleManager(locales, i18n);
     this.layoutManager = new LayoutManager(layouts);
