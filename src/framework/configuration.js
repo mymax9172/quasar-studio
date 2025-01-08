@@ -1,11 +1,10 @@
 import { Application } from "./application";
-import { Navigation } from "./ui/navigation/navigation";
-import { StoryboardManager } from "./storyboard/storyboardManager";
-import { RouteManager } from "./routing/routeManager";
-import { Architecture, architecture } from "./architecture/architecture";
+
+//import { RouteManager } from "./routing/routeManager";
+//import { Architecture, architecture } from "./architecture/architecture";
 
 import { QuasarStudio } from "quasarstudio";
-import { locales, layouts, themes, icons } from "qsconfig";
+import { locales, layouts, themes, icons, navigation, storyboard } from "qsconfig";
 
 import { i18n } from "src/boot/i18n";
 
@@ -13,13 +12,15 @@ const LocaleManager = QuasarStudio.Intl.LocaleManager;
 const LayoutManager = QuasarStudio.UI.LayoutManager;
 const ThemeManager = QuasarStudio.UI.ThemeManager;
 const IconLibrary = QuasarStudio.UI.IconLibrary;
+const NavigationManager = QuasarStudio.UI.NavigationManager;
+const StoryboardManager = QuasarStudio.UI.StoryboardManager;
 
 export class Configuration {
   application;
   layoutManager;
   themeManager;
   iconLibrary;
-  navigation;
+  navigationManager;
   localeManager;
   storyboardManager;
   routeManager;
@@ -29,23 +30,23 @@ export class Configuration {
 
   constructor() {
     this.application = new Application();
-    this.architecture = new Architecture();
+    //this.architecture = new Architecture();
 
     this.iconLibrary = new IconLibrary(icons);
-
     this.localeManager = new LocaleManager(locales, i18n);
     this.layoutManager = new LayoutManager(layouts);
+
     this.themeManager = new ThemeManager(themes);
 
-    this.navigation = new Navigation();
+    this.navigationManager = new NavigationManager(navigation);
 
-    this.storyboardManager = new StoryboardManager();
-    this.routeManager = new RouteManager();
+    this.storyboardManager = new StoryboardManager(storyboard);
+
+    //this.routeManager = new RouteManager();
   }
 
   async initialize() {
-    await this.storyboardManager.initialize();
-    await this.routeManager.initialize(this);
+    //await this.routeManager.initialize(this);
   }
 
   setup(settings) {

@@ -16,11 +16,17 @@ export default {
     },
   },
 
+  watch: {
+    storyboardPage() {
+      console.log("page changed", this.storyboardPage);
+      metaData.title = this.storyboardPage.title + " - " + (configuration.application.title || configuration.application.name);
+
+      //this.$router.go(0);
+    },
+  },
+
   created() {
-    metaData.title =
-      this.storyboardPage.title +
-      " - " +
-      (configuration.application.title || configuration.application.name);
+    metaData.title = this.storyboardPage.title + " - " + (configuration.application.title || configuration.application.name);
   },
 };
 </script>

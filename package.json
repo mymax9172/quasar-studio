@@ -26,6 +26,7 @@
     "quasarstudio": "file:../quasarstudio",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
+    "vue-route-middleware": "^1.0.7",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {

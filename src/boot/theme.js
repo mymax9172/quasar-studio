@@ -72,7 +72,6 @@ export default boot(async ({ app }) => {
       // Create a rule
       let cssContent = "";
       Object.keys(style).forEach((cssKey) => {
-        console.log(key, cssKey, style[cssKey]);
         let value = convertValue(style[cssKey]);
         cssContent += `${cssKey}: ${value} !important; `;
       });
