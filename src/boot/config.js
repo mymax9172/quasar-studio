@@ -4,12 +4,8 @@ import { useSettingsStore } from "src/stores/settings";
 
 console.log("Boot file: config");
 
-let configuration;
-try {
-  // Load default configuration
-  configuration = new Configuration();
-  await configuration.initialize();
-} catch (error) {}
+// Load default configuration
+let configuration = new Configuration();
 
 export default boot(async ({ app, redirect }) => {
   console.log("Executing boot file: config");
