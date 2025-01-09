@@ -1,10 +1,7 @@
-import { Application } from "./application";
-
-//import { RouteManager } from "./routing/routeManager";
 //import { Architecture, architecture } from "./architecture/architecture";
 
 import { QuasarStudio } from "quasarstudio";
-import { locales, layouts, themes, icons, navigation, storyboard } from "qsconfig";
+import { locales, layouts, themes, icons, navigation, storyboard, application } from "qsconfig";
 
 import { i18n } from "src/boot/i18n";
 
@@ -14,6 +11,7 @@ const ThemeManager = QuasarStudio.UI.ThemeManager;
 const IconLibrary = QuasarStudio.UI.IconLibrary;
 const NavigationManager = QuasarStudio.UI.NavigationManager;
 const StoryboardManager = QuasarStudio.UI.StoryboardManager;
+const Application = QuasarStudio.Architecture.Application;
 
 export class Configuration {
   application;
@@ -29,20 +27,15 @@ export class Configuration {
   settings;
 
   constructor() {
-    this.application = new Application();
+    this.application = new Application(application);
     //this.architecture = new Architecture();
 
     this.iconLibrary = new IconLibrary(icons);
     this.localeManager = new LocaleManager(locales, i18n);
     this.layoutManager = new LayoutManager(layouts);
-
     this.themeManager = new ThemeManager(themes);
-
     this.navigationManager = new NavigationManager(navigation);
-
     this.storyboardManager = new StoryboardManager(storyboard);
-
-    //this.routeManager = new RouteManager();
   }
 
   async initialize() {
