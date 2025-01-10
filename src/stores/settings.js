@@ -4,7 +4,6 @@ export const useSettingsStore = defineStore("settings", {
   state: () => ({
     theme: "",
     locale: "",
-    title: "",
   }),
 
   persist: true,
@@ -30,11 +29,6 @@ export const useSettingsStore = defineStore("settings", {
         this.theme = theme;
         this.router.go(0);
       }
-    },
-
-    setTitle(title) {
-      console.log("changing title");
-      this.title = title;
     },
   },
 });
