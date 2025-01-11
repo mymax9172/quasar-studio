@@ -45,12 +45,15 @@ export default boot(async ({ app, urlPath, redirect }) => {
     const datasource = configuration.architecture.datasources[i];
 
     // Retrieve server
-    const server = new datasource.provider.server(datasource.config);
+    const server = new datasource.provider.server(datasource);
+
+    let result = false;
 
     // Check if server is available
     let checkServerFunction = defaultCheckServer;
     if (datasource.checkServer) checkServerFunction = datasource.checkServer;
-    if (!(await checkServerFunction(datasource, server))) {
+    result = await checkServerFunction(datasource, server);
+    if (!result) {
       if (!urlPath.startsWith("/#/error")) {
         redirect({ path: "/error_datasourcenotfound" });
         return;
@@ -58,19 +61,26 @@ export default boot(async ({ app, urlPath, redirect }) => {
     }
 
     // Check if dataset exists
-    let checkDatasetFunction = defaultCheckDataset;
-    if (datasource.checkDataset) checkDatasetFunction = datasource.checkDataset;
-    if (!(await checkDatasetFunction(datasource, server))) {
-      if (!urlPath.startsWith("/#/error")) {
-        redirect({ path: "/error_datasourcenotfound" });
-        return;
+    if (result) {
+      let checkDatasetFunction = defaultCheckDataset;
+      if (datasource.checkDataset) checkDatasetFunction = datasource.checkDataset;
+      result = await checkDatasetFunction(datasource, server);
+      if (!result) {
+        if (!urlPath.startsWith("/#/error")) {
+          redirect({ path: "/error_datasourcenotfound" });
+          return;
+        }
       }
     }
 
     // Retrieve dataset
-    const dataset = await server.useDataset(datasource.name, datasource.entityFactory);
-    datasources[datasource.name] = dataset;
+    if (result) {
+      const dataset = await server.useDataset(datasource.entityFactory);
+      datasources[datasource.name] = dataset;
+    }
   }
+
+  console.log(datasources);
 
   // Store settings in VueJS
   app.config.globalProperties.$datasources = datasources;
